@@ -8,7 +8,7 @@
     @include('style.css')
 
 <body>
-    <section style="margin-top: 100px;">
+    <section class="section my-5">
         <div class="container my-auto">
             <div class="row justify-content-center">
                 <div class="col-md-4">
@@ -31,17 +31,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group has-icon-left">
-                                        <div class="position-relative">
-                                            <input type="password" class="form-control" placeholder="Password"
-                                                id="password-horizontal-icon" name="password">
-                                            <div class="form-control-icon">
-                                                <i class="fa fa-lock"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>                                   
+                                @enderror
                                 <div class="row">
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
@@ -53,38 +45,50 @@
                                         </div>
                                     </div>
                                 </div>
+                                @error('email')
+                                    <div class="alert alert-danger">{{ $message }}</div>                                   
+                                @enderror
                                 <div class="row">
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
-                                            <input type="text" class="form-control" placeholder="Jurusan"
-                                                id="contact-info-horizontal-icon" name="jurusan">
+                                            <input type="password" class="form-control" placeholder="Password"
+                                                id="password-horizontal-icon" name="password">
                                             <div class="form-control-icon">
-                                                <i class="fa fa-mobile-alt"></i>
+                                                <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                @error('password')
+                                    <div class="alert alert-danger">{{ $message }}</div>                                   
+                                @enderror
                                 <div class="row">
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
                                             <input type="number" class="form-control" placeholder="NIP"
                                                 id="contact-info-horizontal-icon" name="nip">
                                             <div class="form-control-icon">
-                                                <i class="fa fa-mobile-alt"></i>
+                                                <i class="fa fa-address-card"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                @error('nip')
+                                    <div class="alert alert-danger">{{ $message }}</div>                                   
+                                @enderror
                                 <div class="row">
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
                                             <textarea class="form-control" placeholder="Alamat" id="horizontal-icon" name="alamat"></textarea>
                                             <div class="form-control-icon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-home"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                @error('alamat')
+                                    <div class="alert alert-danger">{{ $message }}</div>                                   
+                                @enderror
                                 <div class="row mt-3">
                                     <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                 </div>

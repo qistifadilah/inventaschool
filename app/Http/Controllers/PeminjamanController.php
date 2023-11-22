@@ -6,6 +6,7 @@ use App\Models\Inventaris;
 use App\Models\Peminjaman;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class PeminjamanController extends Controller
@@ -16,8 +17,20 @@ class PeminjamanController extends Controller
     public function index()
     {
         //
-        $peminjamans = Peminjaman::all();
-        return view('peminjaman.index', compact('peminjamans'));
+        $user = Auth::user();
+
+        if ($user->id_role == 1) {
+            $peminjamans = Peminjaman::where('id_user', $user->id)->get();
+            return view('peminjaman.index', compact('peminjamans'));
+        };
+        if ($user->id_role == 2) {
+            $peminjamans = Peminjaman::where('id_petugas', $user->id)->orWhere('status', 'dipinjam')->get();
+            return view('peminjaman.index', compact('peminjamans'));
+        };
+        if ($user->id_role == 3) {
+            $peminjamans = Peminjaman::all();
+            return view('peminjaman.index', compact('peminjamans'));
+        };
     }
 
     /**
@@ -28,11 +41,11 @@ class PeminjamanController extends Controller
         //
         $peminjaman = Peminjaman::all();
         $inventaris = Inventaris::all();
-        $user = User::all();
+        $user       = User::all();
 
         // Mendapatkan tanggal hari ini
         $today = now()->toDateString();
-        return view('peminjaman.create', compact('peminjaman','inventaris', 'user', 'today'));
+        return view('peminjaman.create', compact('peminjaman', 'inventaris', 'user', 'today'));
     }
 
     /**
@@ -43,10 +56,10 @@ class PeminjamanController extends Controller
         //
         try {
             $request->validate([
-                'id_user' => 'required',
+                'id_user'       => 'required',
                 'id_inventaris' => 'required',
-                'jumlah' => 'required|integer|min:1',
-                'status' => 'required',
+                'jumlah'        => 'required|integer|min:1',
+                'status'        => 'required',
             ]);
 
             // Cek apakah jumlah melebihi stok
@@ -58,18 +71,19 @@ class PeminjamanController extends Controller
                 ])->redirectTo(route('peminjaman.create'));
             };
 
-        $today = now()->toDateString();
+            $today = now()->toDateString();
 
-        $peminjaman = new Peminjaman();
-        $peminjaman->id_user = $request->id_user;
-        $peminjaman->id_inventaris = $request->id_inventaris;
-        $peminjaman->jumlah = $request->jumlah;
-        $peminjaman->tanggal_pinjam = $today;
-        $peminjaman->tanggal_kembali = $request->input('tanggal_kembali', 'N/A');
-        $peminjaman->status = $request->status;
-        $peminjaman->save();
+            $peminjaman = new Peminjaman();
+            $peminjaman->id_user            = $request->id_user;
+            $peminjaman->id_petugas         = $request->input('id_petugas', 'N/A');
+            $peminjaman->id_inventaris      = $request->id_inventaris;
+            $peminjaman->jumlah             = $request->jumlah;
+            $peminjaman->tanggal_pinjam     = $today;
+            $peminjaman->tanggal_kembali    = $request->input('tanggal_kembali', 'N/A');
+            $peminjaman->status             = $request->status;
+            $peminjaman->save();
 
-        return redirect()->route('peminjaman.index')->with('success', 'Peminjaman berhasil disimpan');
+            return redirect()->route('peminjaman.index')->with('success', 'Peminjaman berhasil disimpan');
         } catch (ValidationException $e) {
             // Tangkap ValidationException dan tangani sesuai kebutuhan
             return redirect()->back()->withErrors($e->validator->errors())->withInput();
@@ -79,10 +93,13 @@ class PeminjamanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Peminjaman $peminjaman)
+    public function show(Peminjaman $peminjaman, User $user, Inventaris $inventaris)
     {
         //
-        return view('peminjaman.show', compact('peminjaman'));
+        $inventaris = $inventaris::all();
+        $user       = $user::all();
+
+        return view('peminjaman.show', compact('peminjaman', 'inventaris', 'user'));
     }
 
     /**
@@ -92,7 +109,7 @@ class PeminjamanController extends Controller
     {
         //
         $inventaris = $inventaris::all();
-        $user = $user::all();
+        $user       = $user::all();
 
         // Mendapatkan tanggal hari ini
         $today = now()->toDateString();
@@ -106,7 +123,6 @@ class PeminjamanController extends Controller
     {
         //
         $request->validate([
-            'id_user' => 'required',
             'id_inventaris' => 'required',
             'tanggal_kembali' => 'required|date',
             'jumlah' => 'required|integer|min:1',
@@ -115,11 +131,11 @@ class PeminjamanController extends Controller
 
         $today = now()->toDateString();
 
-        $peminjaman->id_user = $request->id_user;
-        $peminjaman->id_inventaris = $request->id_inventaris;
-        $peminjaman->tanggal_kembali = $today;
-        $peminjaman->jumlah = $request->jumlah;
-        $peminjaman->status = $request->status;
+        $peminjaman->id_petugas         = $request->id_petugas;
+        $peminjaman->id_inventaris      = $request->id_inventaris;
+        $peminjaman->tanggal_kembali    = $today;
+        $peminjaman->jumlah             = $request->jumlah;
+        $peminjaman->status             = $request->status;
         $peminjaman->save();
 
         return redirect()->route('peminjaman.index')->with('success', 'Peminjaman berhasil diupdate');

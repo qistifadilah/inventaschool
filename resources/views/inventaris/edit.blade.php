@@ -40,9 +40,9 @@
                 <div class="form-group">
                     <label for="id_user">Nama Petugas</label>
                     <input type="hidden" id="id_user" class="form-control @error('id_user') is-invalid @enderror"
-                        name="id_user" value="{{ $user[0]->id }}">
+                        name="id_user" value="{{ $inventari->user->id }}">
                     <input type="text" id="id_user" class="form-control @error('id_user') is-invalid @enderror"
-                        value="{{ $user[0]->name }}">
+                        value="{{ $inventari->user->name }}">
                 </div>
                 @error('id_user')
                     <div class="alert alert-danger">{{ $message }}</div>

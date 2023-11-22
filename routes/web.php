@@ -7,6 +7,7 @@ use App\Http\Controllers\{
     InventarisController,
     PeminjamanController,
     LaporanController,
+    PetugasController,
     AuthController,
 };
 
@@ -25,19 +26,12 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::resource('/jenis', JenisController::class);
-Route::resource('/ruang', RuangController::class);
-Route::resource('/inventaris', InventarisController::class);
-Route::resource('/peminjaman', PeminjamanController::class);
-Route::resource('/laporan', LaporanController::class);
-
-Route::get('/login', function () {
-    return view('auth.login');
-});
-
-Route::get('/register', function () {
-    return view('auth.register');
-});
+Route::resource('/inventaris', InventarisController::class)->middleware('auth');
+Route::resource('/peminjaman', PeminjamanController::class)->middleware('auth');
+Route::resource('/petugas', PetugasController::class);
+Route::resource('/laporan', LaporanController::class)->middleware('auth');
+Route::resource('/jenis', JenisController::class)->middleware('auth');
+Route::resource('/ruang', RuangController::class)->middleware('auth');
 
 Route::controller(AuthController::class)->group(function () {
     //register form

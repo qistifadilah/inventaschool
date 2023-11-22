@@ -37,11 +37,11 @@
             @method('PUT')
             <div class="card-body">
                 <div class="form-group">
-                    <label for="nama">Nama Pegawai</label>
-                    <input type="hidden" id="id_user" class="form-control @error('id_user') is-invalid @enderror"
-                        name="id_user" value="{{ $user[0]->id }}">
-                    <input type="text" id="id_user" class="form-control @error('id_user') is-invalid @enderror"
-                        value="{{ $user[0]->name }}" disabled>
+                    <label for="id_user_pegawai">Nama Pegawai</label>
+                    <input type="hidden" id="id_user_pegawai" class="form-control @error('id_user') is-invalid @enderror"
+                        name="id_user_pegawai" value="{{ $peminjaman->user->id }}" disabled>
+                    <input type="text" id="id_user_pegawai" class="form-control @error('id_user') is-invalid @enderror"
+                        value="{{ $peminjaman->user->name }}" disabled>
                 </div>
                 @error('id_user')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -92,30 +92,39 @@
                     <input type="text" id="tanggal_kembali" class="form-control" name="tanggal_kembali" placeholder="N/A"
                         value="{{ $today }}" readonly>
                 </div>
+                @error('tanggal_kembali')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="form-group">
                     <label for="status">Status</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" value="dipinjam" name="status" id="status2">
+                        <input class="form-check-input" type="radio" value="dipinjam" name="status" id="status2"
+                            @if ($peminjaman->status === 'dipinjam') checked @endif>
                         <label class="form-check-label" for="status2">
                             Dipinjam
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" value="dikembalikan" name="status" id="status2"
-                            checked>
+                            @if ($peminjaman->status === 'dikembalikan') checked @endif>
                         <label class="form-check-label" for="status2">
                             Dikembalikan
                         </label>
                     </div>
-                    @error('status')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
                 </div>
-                {{-- <div class="form-group">
-                    <label for="id_user">Nama Petugas</label>
-                    <input type="text" id="id_user" class="form-control" name="id_user"
-                        placeholder="Masukan Nama Petugas">
-                </div> --}}
+                @error('status')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                <div class="form-group">
+                    <label for="id_petugas">Nama Petugas</label>
+                    <input type="hidden" id="id_petugas" class="form-control @error('id_user') is-invalid @enderror"
+                        name="id_petugas" value="{{ auth()->user()->id_petugas }}">
+                    <input type="text" id="id_petugas" class="form-control @error('id_user') is-invalid @enderror"
+                        value="{{ auth()->user()->name }}">
+                </div>
+                @error('id_user')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             {{-- card footer --}}

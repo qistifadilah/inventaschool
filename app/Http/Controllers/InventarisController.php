@@ -30,7 +30,10 @@ class InventarisController extends Controller
         $jenis = $jenis::all();
         $ruang = $ruang::all();
         $user = $user::all();
-        return view('inventaris.create', compact('inventaris', 'jenis', 'ruang', 'user'));
+
+        $today = now()->toDateString();
+
+        return view('inventaris.create', compact('inventaris', 'jenis', 'ruang', 'user', 'today'));
     }
 
     /**
@@ -51,6 +54,8 @@ class InventarisController extends Controller
             'id_user' => 'required',
         ]);
 
+        $today = now()->toDateString();
+
         $inventaris = new Inventaris();
         $inventaris->kode_inventaris = $request->kode_inventaris;
         $inventaris->nama_barang = $request->nama_barang;
@@ -59,7 +64,7 @@ class InventarisController extends Controller
         $inventaris->stok = $request->stok;
         $inventaris->id_jenis = $request->id_jenis;
         $inventaris->id_ruang = $request->id_ruang;
-        $inventaris->tanggal_register = $request->tanggal_register;
+        $inventaris->tanggal_register = $today;
         $inventaris->id_user = $request->id_user;
         $inventaris->save();
 

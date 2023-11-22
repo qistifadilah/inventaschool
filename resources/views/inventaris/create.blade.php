@@ -40,10 +40,10 @@
                     <label for="id_user">Nama Petugas</label>
                     <input type="hidden" id="id_user"
                         class="form-control @error('id_user') is-invalid @enderror" name="id_user"
-                        value="{{ $user[0]->id }}">
+                        value="{{ auth()->user()->id }}">
                     <input type="text" id="id_user"
                         class="form-control @error('id_user') is-invalid @enderror""
-                        value="{{ $user[0]->name }}">
+                        value="{{ auth()->user()->name }}">
                 </div>
                 @error('id_user')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -100,7 +100,7 @@
                     <label for="tanggal_register">Tanggal Register</label>
                     <input type="date" id="tanggal_register"
                         class="form-control @error('tanggal_register') is-invalid @enderror" name="tanggal_register"
-                        placeholder="Masukan Tanggal Register">
+                        placeholder="Masukan Tanggal Register" value="{{ $today }}">
                 </div>
             </div>
 

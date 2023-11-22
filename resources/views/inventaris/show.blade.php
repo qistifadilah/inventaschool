@@ -37,7 +37,7 @@
             <div class="form-group">
                 <label for="id_user">Nama Petugas</label>
                 <input type="text" id="id_user" class="form-control @error('id_user') is-invalid @enderror"
-                    name="id_user" value="{{ $user[0]->name }}" disabled placeholder="Masukan Nama Petugas">
+                    name="id_user" value="{{ $inventari->user->name }}" disabled placeholder="Masukan Nama Petugas">
             </div>
             @error('id_user')
                 <div class="alert alert-danger">{{ $message }}</div>

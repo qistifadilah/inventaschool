@@ -37,10 +37,10 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="nama">Nama Pegawai</label>
-                    <input type="hidden" id="id_user" class="form-control @error('id_user') is-invalid @enderror"
-                        name="id_user" value="{{ $user[0]->id }}">
-                    <input type="text" id="id_user" class="form-control @error('id_user') is-invalid @enderror"
-                        value="{{ $user[0]->name }}" disabled>
+                    <input type="hidden" id="id" class="form-control @error('id_user') is-invalid @enderror"
+                        name="id_user" value="{{ auth()->user()->id }}">
+                    <input type="text" id="id" class="form-control @error('id_user') is-invalid @enderror"
+                        value="{{ auth()->user()->name }}" disabled>
                 </div>
                 @error('id_user')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -113,10 +113,20 @@
                     @enderror
                 </div>
                 {{-- <div class="form-group">
-                    <label for="id_user">Nama Petugas</label>
-                    <input type="text" id="id_user" class="form-control" name="id_user"
+                    <label for="id">Nama Petugas</label>
+                    <input type="text" id="id" class="form-control" name="id"
                         placeholder="Masukan Nama Petugas">
                 </div> --}}
+                <div class="form-group">
+                    <label for="id_petugas">Nama Petugas</label>
+                    <input type="hidden" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
+                        name="id_petugas" value="">
+                    <input type="text" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
+                        value="N/A" readonly>
+                </div>
+                @error('id_petugas')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             {{-- card footer --}}

@@ -36,16 +36,16 @@
             <div class="form-group">
                 <label for="nama_jenis">Nama Jenis</label>
                 <input type="text" id="nama_jenis" class="form-control" name="nama_jenis"
-                    placeholder="Masukan Nama Jenis" value="{{ $jenis->nama_jenis }}" disabled>
+                    placeholder="Masukan Nama Jenis" value="{{ $jeni->nama_jenis }}" disabled>
             </div>
             <div class="form-group">
                 <label for="kode_jenis">Kode Jenis</label>
                 <input type="text" id="kode_jenis" class="form-control" name="kode_jenis"
-                    placeholder="Masukan Kode Jenis" value="{{ $jenis->kode_jenis }}" disabled>
+                    placeholder="Masukan Kode Jenis" value="{{ $jeni->kode_jenis }}" disabled>
             </div>
             <div class="form-group">
                 <label for="keterangan">Keterangan</label>
-                <textarea id="keterangan" class="form-control" name="keterangan" placeholder="Masukan Keterangan" disabled>{{ $jenis->keterangan }}</textarea>
+                <textarea id="keterangan" class="form-control" name="keterangan" placeholder="Masukan Keterangan" disabled>{{ $jeni->keterangan }}</textarea>
             </div>
         </div>
 

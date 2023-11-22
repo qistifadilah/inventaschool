@@ -11,12 +11,11 @@ class Profile extends Model
     use HasFactory;
     protected $table = 'profiles';
     protected $fillable = [
-        'user_id',
         'nip',
         'alamat'
     ];
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class);
     }
 }
