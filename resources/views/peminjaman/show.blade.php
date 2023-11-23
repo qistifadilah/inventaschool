@@ -44,6 +44,16 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="form-group">
+                <label for="id_petugas">Nama Petugas</label>
+                <input type="text" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
+                    name="id_petugas" value="{{ $namaPetugas }}" disabled>
+                {{-- <input type="text" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
+                        value="{{ auth()->user()->name }}"> --}}
+            </div>
+            @error('id_petugas')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <div class="form-group">
                 <label for="id_inventaris">Nama Barang</label>
                 <select name="id_inventaris" id="id_inventaris"
                     class="form-select @error('id_inventaris') is-invalid @enderror" disabled>
@@ -97,13 +107,6 @@
             @error('status')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            <div class="form-group">
-                <label for="id_user">Nama Petugas</label>
-                <input type="hidden" id="id_user" class="form-control @error('id_user') is-invalid @enderror"
-                    name="id_user" value="{{ $peminjaman->id_pegawai }}">
-                <input type="text" id="id_user" class="form-control @error('id_user') is-invalid @enderror"
-                    value="{{ $peminjaman->user->name }}" disabled>
-            </div>
         </div>
         <div class="card-footer bg-body-tertiary" style="border: none;">
             <div class="row">

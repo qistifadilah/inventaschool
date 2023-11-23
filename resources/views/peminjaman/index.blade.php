@@ -54,10 +54,10 @@
                                 <td>{{ $value->tanggal_pinjam }}</td>
                                 <td>{{ $value->tanggal_kembali ?? 'N/A' }}</td>
                                 <td>
-                                    @if ($value->status == 'dipinjam')
-                                        <span class="badge bg-warning text-white">{{ $value->status }}</span>
-                                    @elseif($value->status == 'dikembalikan')
-                                        <span class="badge bg-success text-white">{{ $value->status }}</span>
+                                    @if ($value->status == 1)
+                                        <span class="badge bg-warning text-white">dipinjam</span>
+                                    @elseif($value->status == 2)
+                                        <span class="badge bg-success text-white">dikembalikan</span>
                                     @endif
                                 </td>
                                 <td>

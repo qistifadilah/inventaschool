@@ -36,6 +36,15 @@
             @csrf
             <div class="card-body">
                 <div class="form-group">
+                    <label for="kode">Kode Peminjaman</label>
+                    <input type="text" id="kode"
+                        class="form-control @error('kode') is-invalid @enderror" name="kode"
+                        value="{{ $nextKode }}" placeholder="Masukan Kode Peminjaman" disabled>
+                </div>
+                @error('kode')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                <div class="form-group">
                     <label for="nama">Nama Pegawai</label>
                     <input type="hidden" id="id" class="form-control @error('id_user') is-invalid @enderror"
                         name="id_user" value="{{ auth()->user()->id }}">
@@ -43,6 +52,16 @@
                         value="{{ auth()->user()->name }}" disabled>
                 </div>
                 @error('id_user')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                <div class="form-group">
+                    <label for="id_petugas">Nama Petugas</label>
+                    <input type="hidden" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
+                        name="id_petugas" value="">
+                    <input type="text" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
+                        value="N/A" disabled>
+                </div>
+                @error('id_petugas')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
@@ -66,7 +85,7 @@
                 <div class="form-group">
                     <label for="stok">Stok Barang</label>
                     <input type="number" id="stok" class="form-control" name="" placeholder="Stok Barang"
-                        value="" disabled>
+                        value="" readonly>
                 </div>
                 @error('id_inventaris')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -95,14 +114,14 @@
                 <div class="form-group">
                     <label for="status">Status</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" value="dipinjam" name="status" id="status2"
+                        <input class="form-check-input" type="radio" value="1" name="status" id="status2"
                             checked>
                         <label class="form-check-label" for="status2">
                             Dipinjam
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" value="kembali" name="status" id="status2"
+                        <input class="form-check-input" type="radio" value="2" name="status" id="status2"
                             disabled>
                         <label class="form-check-label" for="status2">
                             Dikembalikan
@@ -117,16 +136,6 @@
                     <input type="text" id="id" class="form-control" name="id"
                         placeholder="Masukan Nama Petugas">
                 </div> --}}
-                <div class="form-group">
-                    <label for="id_petugas">Nama Petugas</label>
-                    <input type="hidden" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
-                        name="id_petugas" value="">
-                    <input type="text" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
-                        value="N/A" readonly>
-                </div>
-                @error('id_petugas')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
             </div>
 
             {{-- card footer --}}

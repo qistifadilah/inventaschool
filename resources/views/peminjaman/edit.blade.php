@@ -37,6 +37,15 @@
             @method('PUT')
             <div class="card-body">
                 <div class="form-group">
+                    <label for="kode">Kode Peminjaman</label>
+                    <input type="text" id="kode"
+                        class="form-control @error('kode') is-invalid @enderror" name="kode"
+                        value="{{ $peminjaman->kode }}" placeholder="Masukan Kode Peminjaman" disabled>
+                </div>
+                @error('kode')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                <div class="form-group">
                     <label for="id_user_pegawai">Nama Pegawai</label>
                     <input type="hidden" id="id_user_pegawai" class="form-control @error('id_user') is-invalid @enderror"
                         name="id_user_pegawai" value="{{ $peminjaman->user->id }}" disabled>
@@ -44,6 +53,20 @@
                         value="{{ $peminjaman->user->name }}" disabled>
                 </div>
                 @error('id_user')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                <div class="form-group">
+                    <label for="id_petugas">Nama Petugas</label>
+                    {{-- <input type="text" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
+                        name="id_petugas" value="{{ $namaPetugas }}"> --}}
+                    {{-- <input type="text" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
+                        value="{{ auth()->user()->name }}"> --}}
+                    <input type="hidden" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
+                        name="id_petugas" value="{{ auth()->user()->id }}">
+                    <input type="text" id="" class="form-control @error('id_petugas') is-invalid @enderror"
+                        value="{{ auth()->user()->name }}" disabled>
+                </div>
+                @error('id_petugas')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
@@ -74,7 +97,7 @@
                 <div class="form-group">
                     <label for="jumlah">Jumlah Pinjam</label>
                     <input type="number" id="jumlah" class="form-control @error('jumlah') is-invalid @enderror"
-                        name="jumlah" placeholder="Masukan Jumlah Pinjam" value="{{ $peminjaman->jumlah }}">
+                        name="jumlah" placeholder="Masukan Jumlah Pinjam" value="{{ $peminjaman->jumlah }}" disabled>
                 </div>
                 @error('jumlah')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -98,31 +121,21 @@
                 <div class="form-group">
                     <label for="status">Status</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" value="dipinjam" name="status" id="status2"
-                            @if ($peminjaman->status === 'dipinjam') checked @endif>
+                        <input class="form-check-input" type="radio" value="1" name="status" id="status2"
+                            @if ($peminjaman->status === '1') checked @endif>
                         <label class="form-check-label" for="status2">
                             Dipinjam
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" value="dikembalikan" name="status" id="status2"
-                            @if ($peminjaman->status === 'dikembalikan') checked @endif>
+                        <input class="form-check-input" type="radio" value="2" name="status" id="status2"
+                            @if ($peminjaman->status === '2') checked @endif>
                         <label class="form-check-label" for="status2">
                             Dikembalikan
                         </label>
                     </div>
                 </div>
                 @error('status')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                <div class="form-group">
-                    <label for="id_petugas">Nama Petugas</label>
-                    <input type="hidden" id="id_petugas" class="form-control @error('id_user') is-invalid @enderror"
-                        name="id_petugas" value="{{ auth()->user()->id_petugas }}">
-                    <input type="text" id="id_petugas" class="form-control @error('id_user') is-invalid @enderror"
-                        value="{{ auth()->user()->name }}">
-                </div>
-                @error('id_user')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>

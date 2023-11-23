@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('peminjamans', function (Blueprint $table) {
             $table->id();
+            $table->integer('kode');
             $table->foreignId('id_user')->nullable()->constrained('users');
             $table->foreignId('id_petugas')->nullable()->constrained('users');
             $table->foreignId('id_inventaris')->constrained('inventaris');

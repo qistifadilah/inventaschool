@@ -24,13 +24,33 @@ class PeminjamanController extends Controller
             return view('peminjaman.index', compact('peminjamans'));
         };
         if ($user->id_role == 2) {
-            $peminjamans = Peminjaman::where('id_petugas', $user->id)->orWhere('status', 'dipinjam')->get();
+            $peminjamans = Peminjaman::where('id_petugas', $user->id)->orWhere('status', '1')->get();
             return view('peminjaman.index', compact('peminjamans'));
         };
         if ($user->id_role == 3) {
             $peminjamans = Peminjaman::all();
             return view('peminjaman.index', compact('peminjamans'));
         };
+    }
+
+    // Metode untuk membuat kode peminjaman baru
+    private function kode()
+    {
+        // Mendapatkan nomor urut terakhir dari database
+        $lastPeminjaman = Peminjaman::latest()->first();
+
+        // Jika tidak ada data peminjaman sebelumnya
+        if (!$lastPeminjaman) {
+            $nextNumber = 1;
+        } else {
+            // Mendapatkan nomor urut dan menambahkan 1
+            $nextNumber = (int)substr($lastPeminjaman->kode, 1) + 1;
+        }
+
+        // Mengonversi nomor urut menjadi format PXXX
+        $nextKode = 'P' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+
+        return $nextKode;
     }
 
     /**
@@ -45,7 +65,10 @@ class PeminjamanController extends Controller
 
         // Mendapatkan tanggal hari ini
         $today = now()->toDateString();
-        return view('peminjaman.create', compact('peminjaman', 'inventaris', 'user', 'today'));
+        // Mendapatkan kode peminjaman baru
+        $nextKode = $this->kode();
+
+        return view('peminjaman.create', compact('peminjaman', 'inventaris', 'user', 'today', 'nextKode'));
     }
 
     /**
@@ -72,8 +95,10 @@ class PeminjamanController extends Controller
             };
 
             $today = now()->toDateString();
+            $nextKode = $this->kode();
 
             $peminjaman = new Peminjaman();
+            $peminjaman->kode               = $nextKode;
             $peminjaman->id_user            = $request->id_user;
             $peminjaman->id_petugas         = $request->input('id_petugas', 'N/A');
             $peminjaman->id_inventaris      = $request->id_inventaris;
@@ -98,8 +123,14 @@ class PeminjamanController extends Controller
         //
         $inventaris = $inventaris::all();
         $user       = $user::all();
+        
+        // Mendapatkan user dengan ID petugas yang sesuai
+        $petugas = $user->firstWhere('id', $peminjaman->id_petugas);
 
-        return view('peminjaman.show', compact('peminjaman', 'inventaris', 'user'));
+        // Mendapatkan nama petugas
+        $namaPetugas = $petugas ? $petugas->name : 'N/A';
+
+        return view('peminjaman.show', compact('peminjaman', 'inventaris', 'user', 'namaPetugas'));
     }
 
     /**
@@ -123,10 +154,9 @@ class PeminjamanController extends Controller
     {
         //
         $request->validate([
-            'id_inventaris' => 'required',
-            'tanggal_kembali' => 'required|date',
-            'jumlah' => 'required|integer|min:1',
-            'status' => 'required',
+            'id_inventaris'     => 'required',
+            'tanggal_kembali'   => 'required|date',
+            'status'            => 'required',
         ]);
 
         $today = now()->toDateString();
@@ -134,7 +164,6 @@ class PeminjamanController extends Controller
         $peminjaman->id_petugas         = $request->id_petugas;
         $peminjaman->id_inventaris      = $request->id_inventaris;
         $peminjaman->tanggal_kembali    = $today;
-        $peminjaman->jumlah             = $request->jumlah;
         $peminjaman->status             = $request->status;
         $peminjaman->save();
 
