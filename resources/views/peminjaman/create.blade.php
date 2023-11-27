@@ -37,9 +37,8 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="kode">Kode Peminjaman</label>
-                    <input type="text" id="kode"
-                        class="form-control @error('kode') is-invalid @enderror" name="kode"
-                        value="{{ $nextKode }}" placeholder="Masukan Kode Peminjaman" disabled>
+                    <input type="text" id="kode" class="form-control @error('kode') is-invalid @enderror"
+                        name="kode" value="{{ $nextKode }}" placeholder="Masukan Kode Peminjaman" disabled>
                 </div>
                 @error('kode')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -65,12 +64,27 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
+                    <label for="id_ruang">Ruang</label>
+                    <select name="id_ruang" id="id_ruang" class="form-select @error('id_ruang') is-invalid @enderror">
+                        <option disabled selected>--Pilih Salah Satu--</option>
+                        @forelse ($ruangs as $key => $ruang)
+                            <option value="{{ $ruang->id }}">{{ $ruang->nama_ruang }}</option>
+                        @empty
+                            <option disabled>--Data Masih Kosong--</option>
+                        @endforelse
+                    </select>
+                </div>
+                @error('id_ruang')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                <div class="form-group">
                     <label for="id_inventaris">Nama Barang</label>
                     <select name="id_inventaris" id="id_inventaris"
                         class="form-select @error('id_inventaris') is-invalid @enderror">
                         <option disabled selected>--Pilih Salah Satu--</option>
                         @forelse ($inventaris as $value)
-                            <option value="{{ $value->id }}" data-stok="{{ $value->stok }}">
+                            <option value="{{ $value->id }}" data-stok="{{ $value->stok }}"
+                                data-ruang="{{ $value->id_ruang }}">
                                 {{ $value->nama_barang }}
                             </option>
                         @empty
@@ -108,8 +122,8 @@
                 @enderror
                 <div class="form-group">
                     <label for="tanggal_kembali">Tanggal Kembali</label>
-                    <input type="text" id="tanggal_kembali" class="form-control" name="tanggal_kembali" placeholder="N/A"
-                        value="" readonly>
+                    <input type="text" id="tanggal_kembali" class="form-control" name="tanggal_kembali"
+                        placeholder="N/A" value="" readonly>
                 </div>
                 <div class="form-group">
                     <label for="status">Status</label>
@@ -153,10 +167,41 @@
             </div>
         </form>
     </div>
-    <script>
-        document.getElementById('id_inventaris').addEventListener('change', function() {
+<script>
+    // Event listener untuk mengubah stok berdasarkan pilihan barang
+    document.getElementById('id_ruang').addEventListener('change', function() {
+        var selectedRuang = this.value;
+
+        // Sembunyikan semua opsi
+        Array.from(document.getElementById('id_inventaris').options).forEach(function(option) {
+            option.style.display = 'none';
+        });
+
+        // Tampilkan hanya opsi dengan ruang yang cocok
+        Array.from(document.querySelectorAll('#id_inventaris [data-ruang]')).forEach(function(option) {
+            if (option.getAttribute('data-ruang') === selectedRuang || selectedRuang === "") {
+                option.style.display = '';
+            }
+        });
+
+        // Atur nilai stok untuk opsi pertama yang terlihat
+        var visibleOptions = Array.from(document.getElementById('id_inventaris').options).filter(function(option) {
+            return option.style.display !== 'none';
+        });
+
+        if (visibleOptions.length > 0) {
+            document.getElementById('stok').value = visibleOptions[0].getAttribute('data-stok');
+        } else {
+            document.getElementById('stok').value = '';
+        }
+    });
+
+    document.getElementById('id_inventaris').addEventListener('change', function() {
             var selectedOption = this.options[this.selectedIndex];
             document.getElementById('stok').value = selectedOption.getAttribute('data-stok');
         });
-    </script>
+</script>
+
+
+
 @endsection

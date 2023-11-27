@@ -1,9 +1,11 @@
 {{-- js --}}
 <script src="{{ asset('dist/assets/static/js/components/dark.js') }}"></script>
+{{-- horizontal layout --}}
+<script src="{{ asset('dist/assets/static/js/pages/horizontal-layout.js') }}"></script>
+
 <script src="{{ asset('dist/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-
-
 <script src="{{ asset('dist/assets/compiled/js/app.js') }}"></script>
+
 
 {{-- datatable --}}
 <script src="{{ asset('dist/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>

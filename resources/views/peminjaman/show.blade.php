@@ -34,6 +34,14 @@
         {{-- card-body --}}
         <div class="card-body">
             <div class="form-group">
+                    <label for="kode">Kode Peminjaman</label>
+                    <input type="text" id="kode" class="form-control @error('kode') is-invalid @enderror"
+                        name="kode" value="{{ $peminjaman->kode }}" placeholder="Masukan Kode Peminjaman" disabled>
+                </div>
+                @error('kode')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            <div class="form-group">
                 <label for="nama">Nama Pegawai</label>
                 <input type="hidden" id="id_user" class="form-control @error('id_user') is-invalid @enderror"
                     name="id_user" value="{{ $peminjaman->user->id }}">
@@ -54,12 +62,25 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="form-group">
+                <label for="id_ruang">Ruang</label>
+                <select name="id_ruang" id="id_ruang" class="form-control @error('id_ruang') is-invalid @enderror"
+                    disabled>
+                    <option disabled selected>--Pilih Salah Satu--</option>
+                    @forelse ($ruangs as $key => $ruang)
+                        <option value="{{ $ruang->id }}">{{ $ruang->nama_ruang }}</option>
+                    @empty
+                        <option disabled>--Data Masih Kosong--</option>
+                    @endforelse
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="id_inventaris">Nama Barang</label>
-                <select name="id_inventaris" id="id_inventaris"
-                    class="form-select @error('id_inventaris') is-invalid @enderror" disabled>
+                <select name="" id="id_inventaris" class="form-control @error('id_inventaris') is-invalid @enderror"
+                    disabled>
                     @forelse ($inventaris as $key => $value)
                         <option value="{{ $value->id }}" data-stok="{{ $value->stok }}"
-                            {{ $value->id == $peminjaman->id_inventaris ? 'selected' : '' }} disabled>
+                            data-ruang="{{ $value->id_ruang }}"
+                            {{ $value->id == $peminjaman->id_inventaris ? 'selected' : '' }}>
                             {{ $value->nama_barang }}
                         </option>
                     @empty
@@ -102,7 +123,7 @@
             <div class="form-group">
                 <label for="status">Status</label>
                 <input type="text" id="status" class="form-control" name="status" placeholder="N/A"
-                    value="{{ $peminjaman->status }}" disabled>
+                    value="{{ $peminjaman->status == 1 ? 'Dipinjam' : 'Dikembalikan' }}" disabled>
             </div>
             @error('status')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -119,21 +140,34 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Ambil elemen stok dan id_inventaris
+            // Ambil elemen stok, id_inventaris, id_ruang, dan nama_ruang
             var stokInput = document.getElementById('stok');
             var idInventarisSelect = document.getElementById('id_inventaris');
+            var idRuangDisplay = document.getElementById('id_ruang');
+            var namaRuangDisplay = document.getElementById('nama_ruang'); // Tambahkan ini
 
-            // Fungsi untuk mengatur nilai stok saat halaman dimuat
-            function setStok() {
+            // Fungsi untuk mengatur nilai stok, id_ruang, dan nama_ruang saat halaman dimuat
+            function setStokAndRuang() {
                 var selectedOption = idInventarisSelect.options[idInventarisSelect.selectedIndex];
                 stokInput.value = selectedOption.getAttribute('data-stok') || '';
+                idRuangDisplay.value = selectedOption.getAttribute('data-ruang') || '';
+                namaRuangDisplay.value = getNamaRuang(selectedOption.getAttribute('data-ruang')) ||
+                    ''; // Tambahkan ini
             }
 
-            // Panggil fungsi setStok saat halaman dimuat
-            setStok();
+            // Panggil fungsi setStokAndRuang saat halaman dimuat
+            setStokAndRuang();
 
             // Tambahkan event listener untuk merespons perubahan pada dropdown id_inventaris
-            idInventarisSelect.addEventListener('change', setStok);
+            idInventarisSelect.addEventListener('change', setStokAndRuang);
+
+            // Fungsi untuk mendapatkan nama ruang berdasarkan id ruang
+            function getNamaRuang(idRuang) {
+                var ruang = Array.from(document.getElementById('id_ruang').options).find(function(option) {
+                    return option.value == idRuang;
+                });
+                return ruang ? ruang.text : '';
+            }
         });
     </script>
 @endsection

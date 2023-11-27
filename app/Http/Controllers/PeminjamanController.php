@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Inventaris;
 use App\Models\Peminjaman;
 use App\Models\User;
+use App\Models\Ruang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -16,22 +17,25 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        //
         $user = Auth::user();
 
         if ($user->id_role == 1) {
             $peminjamans = Peminjaman::where('id_user', $user->id)->get();
-            return view('peminjaman.index', compact('peminjamans'));
-        };
-        if ($user->id_role == 2) {
+        } elseif ($user->id_role == 2) {
             $peminjamans = Peminjaman::where('id_petugas', $user->id)->orWhere('status', '1')->get();
-            return view('peminjaman.index', compact('peminjamans'));
-        };
-        if ($user->id_role == 3) {
+        } elseif ($user->id_role == 3) {
             $peminjamans = Peminjaman::all();
-            return view('peminjaman.index', compact('peminjamans'));
-        };
+        }
+
+        // Mendapatkan ID petugas yang sesuai
+        $petugasIds = $peminjamans->pluck('id_petugas')->filter();
+
+        // Mendapatkan nama petugas
+        $petugas = User::whereIn('id', $petugasIds)->get()->keyBy('id');
+
+        return view('peminjaman.index', compact('peminjamans', 'petugas'));
     }
+
 
     // Metode untuk membuat kode peminjaman baru
     private function kode()
@@ -62,13 +66,14 @@ class PeminjamanController extends Controller
         $peminjaman = Peminjaman::all();
         $inventaris = Inventaris::all();
         $user       = User::all();
+        $ruangs     = Ruang::all();
 
         // Mendapatkan tanggal hari ini
         $today = now()->toDateString();
         // Mendapatkan kode peminjaman baru
         $nextKode = $this->kode();
 
-        return view('peminjaman.create', compact('peminjaman', 'inventaris', 'user', 'today', 'nextKode'));
+        return view('peminjaman.create', compact('peminjaman', 'inventaris', 'user', 'ruangs', 'today', 'nextKode'));
     }
 
     /**
@@ -94,6 +99,12 @@ class PeminjamanController extends Controller
                 ])->redirectTo(route('peminjaman.create'));
             };
 
+            // Kurangi stok inventaris
+            $inventaris->stok -= $request->jumlah;
+
+            // Simpan perubahan stok
+            $inventaris->save();
+
             $today = now()->toDateString();
             $nextKode = $this->kode();
 
@@ -118,33 +129,35 @@ class PeminjamanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Peminjaman $peminjaman, User $user, Inventaris $inventaris)
+    public function show(Peminjaman $peminjaman, User $user, Inventaris $inventaris, Ruang $ruangs)
     {
         //
         $inventaris = $inventaris::all();
         $user       = $user::all();
-        
+        $ruangs     = Ruang::all();
+
         // Mendapatkan user dengan ID petugas yang sesuai
         $petugas = $user->firstWhere('id', $peminjaman->id_petugas);
 
         // Mendapatkan nama petugas
         $namaPetugas = $petugas ? $petugas->name : 'N/A';
 
-        return view('peminjaman.show', compact('peminjaman', 'inventaris', 'user', 'namaPetugas'));
+        return view('peminjaman.show', compact('peminjaman', 'inventaris', 'user', 'ruangs', 'namaPetugas'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Peminjaman $peminjaman, User $user, Inventaris $inventaris)
+    public function edit(Peminjaman $peminjaman, User $user, Inventaris $inventaris, Ruang $ruangs)
     {
         //
         $inventaris = $inventaris::all();
         $user       = $user::all();
+        $ruangs     = Ruang::all();
 
         // Mendapatkan tanggal hari ini
         $today = now()->toDateString();
-        return view('peminjaman.edit', compact('peminjaman', 'inventaris', 'user', 'today'));
+        return view('peminjaman.edit', compact('peminjaman', 'inventaris', 'user', 'today', 'ruangs'));
     }
 
     /**
@@ -160,6 +173,11 @@ class PeminjamanController extends Controller
         ]);
 
         $today = now()->toDateString();
+
+        // Tambahkan stok inventaris
+        $inventaris = Inventaris::find($request->id_inventaris);
+        $inventaris->stok += $peminjaman->jumlah;
+        $inventaris->save();
 
         $peminjaman->id_petugas         = $request->id_petugas;
         $peminjaman->id_inventaris      = $request->id_inventaris;

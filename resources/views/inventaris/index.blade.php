@@ -25,9 +25,19 @@
     <section class="section">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">
-                    Data Inventaris
-                </h5>
+                <div class="row">
+                    <div class="col-6 d-flex">
+                        <h5 class="card-title">
+                            Data Inventaris
+                        </h5>
+                    </div>
+                    <div class="col-6 d-flex justify-content-end">
+                        <a href="{{ route('inventaris.create') }}" class="btn btn-primary">
+                            <i class="bi bi-plus-lg"></i>
+                            Inventaris
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <table class="table" id="table1">
@@ -60,16 +70,18 @@
                                         data-toggle="tooltip" data-placement="top" title="edit">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <form action="{{ route('inventaris.destroy', $value->id) }}" method="POST"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" data-toggle="tooltip" data-placement="top"
-                                            title="delete"
-                                            onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
+                                    @can('isAdmin')
+                                        <form action="{{ route('inventaris.destroy', $value->id) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                                                title="delete"
+                                                onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @empty
@@ -79,12 +91,6 @@
                         @endforelse
                     </tbody>
                 </table>
-            </div>
-            <div class="card-footer">
-                <a href="{{ route('inventaris.create') }}" class="btn btn-primary">
-                    <i class="bi bi-plus-lg"></i>
-                    Inventaris
-                </a>
             </div>
         </div>
     </section>

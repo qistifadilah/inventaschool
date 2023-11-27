@@ -118,7 +118,7 @@
                     <label for="tanggal_register">Tanggal Register</label>
                     <input type="date" id="tanggal_register"
                         class="form-control @error('tanggal_register') is-invalid @enderror" name="tanggal_register"
-                        value="{{ $inventari->tanggal_register }}" placeholder="Masukan Tanggal Register">
+                        value="{{ $today }}" placeholder="Masukan Tanggal Register">
                 </div>
                 @error('tanggal_register')
                     <div class="alert alert-danger">{{ $message }}</div>

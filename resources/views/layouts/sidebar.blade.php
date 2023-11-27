@@ -1,6 +1,6 @@
 <div id="sidebar">
     <div class="sidebar-wrapper active">
-        <div class="sidebar-header position-relative">
+        <div class="sidebar-header position-relative pb-0">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
                     <a href="index.html"><img src="{{ asset('img/logo.png') }}" style="width: 198.12px; height: 30px"
@@ -37,7 +37,10 @@
                 </svg>
             </div>
             <hr>
-            <h5 class="text-center">Hi, {{ Auth::user()->name }}</h5>
+            <div class="text text-center">
+            <h5>Hi, {{ Auth::user()->name }}</h5>
+            <p class="text-sm text-muted">{{ Auth::user()->email }}</p>
+            </div>
             <div class="sidebar-toggler  x">
                 <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
             </div>
@@ -52,71 +55,68 @@
                 </li>
 
                 @can('isAdmin')
-                <li class="sidebar-item @if (Request::segment(1) == 'petugas') active @endif">
-                    <a href="{{ route('petugas.index') }}" class="sidebar-link">
-                        <i class="bi bi-person-badge-fill"></i>
-                        <span>Data Petugas</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item @if (Request::segment(1) == 'petugas') active @endif">
+                        <a href="{{ route('petugas.index') }}" class="sidebar-link">
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Data Petugas</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item @if (Request::segment(1) == 'user') active @endif">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-person-badge-fill"></i>
-                        <span>Data Pegawai</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item @if (Request::segment(1) == 'user') active @endif">
+                        <a href="#" class="sidebar-link">
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Data Pegawai</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item @if (Request::segment(1) == 'inventaris') active @endif">
-                    <a href="{{ route('inventaris.index') }}" class="sidebar-link">
-                        <i class="bi bi-boxes"></i>
-                        <span>Inventaris</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item @if (Request::segment(1) == 'inventaris') active @endif">
+                        <a href="{{ route('inventaris.index') }}" class="sidebar-link">
+                            <i class="bi bi-boxes"></i>
+                            <span>Inventaris</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item @if (Request::segment(1) == 'jenis') active @endif">
-                    <a href="{{ route('jenis.index') }}" class="sidebar-link">
-                        <i class="bi bi-boxes"></i>
-                        <span>Jenis</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item @if (Request::segment(1) == 'jenis') active @endif">
+                        <a href="{{ route('jenis.index') }}" class="sidebar-link">
+                            <i class="bi bi-boxes"></i>
+                            <span>Jenis</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item @if (Request::segment(1) == 'ruang') active @endif">
-                    <a href="{{ route('ruang.index') }}" class="sidebar-link">
-                        <i class="bi bi-boxes"></i>
-                        <span>Ruang</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item @if (Request::segment(1) == 'ruang') active @endif">
+                        <a href="{{ route('ruang.index') }}" class="sidebar-link">
+                            <i class="bi bi-boxes"></i>
+                            <span>Ruang</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item @if (Request::segment(1) == 'peminjaman') active @endif">
-                    <a href="{{ route('peminjaman.index') }}" class="sidebar-link">
-                        <i class="bi bi-boxes"></i>
-                        <span>Peminjaman</span>
-                    </a>
-                </li>
-
+                    <li class="sidebar-item @if (Request::segment(1) == 'peminjaman') active @endif">
+                        <a href="{{ route('peminjaman.index') }}" class="sidebar-link">
+                            <i class="bi bi-boxes"></i>
+                            <span>Peminjaman</span>
+                        </a>
+                    </li>
                 @elsecan('isPetugas')
-                <li class="sidebar-item @if (Request::segment(1) == 'inventaris') active @endif">
-                    <a href="{{ route('inventaris.index') }}" class="sidebar-link">
-                        <i class="bi bi-boxes"></i>
-                        <span>Inventaris</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item @if (Request::segment(1) == 'inventaris') active @endif">
+                        <a href="{{ route('inventaris.index') }}" class="sidebar-link">
+                            <i class="bi bi-boxes"></i>
+                            <span>Inventaris</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item @if (Request::segment(1) == 'peminjaman') active @endif">
-                    <a href="{{ route('peminjaman.index') }}" class="sidebar-link">
-                        <i class="bi bi-boxes"></i>
-                        <span>Peminjaman</span>
-                    </a>
-                </li>
-
+                    <li class="sidebar-item @if (Request::segment(1) == 'peminjaman') active @endif">
+                        <a href="{{ route('peminjaman.index') }}" class="sidebar-link">
+                            <i class="bi bi-boxes"></i>
+                            <span>Peminjaman</span>
+                        </a>
+                    </li>
                 @else
-                <li class="sidebar-item @if (Request::segment(1) == 'peminjaman') active @endif">
-                    <a href="{{ route('peminjaman.index') }}" class="sidebar-link">
-                        <i class="bi bi-boxes"></i>
-                        <span>Peminjaman</span>
-                    </a>
-                </li>
-
+                    <li class="sidebar-item @if (Request::segment(1) == 'peminjaman') active @endif">
+                        <a href="{{ route('peminjaman.index') }}" class="sidebar-link">
+                            <i class="bi bi-boxes"></i>
+                            <span>Peminjaman</span>
+                        </a>
+                    </li>
                 @endcan
 
                 <li class="sidebar-item">

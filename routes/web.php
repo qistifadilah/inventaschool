@@ -23,8 +23,8 @@ use App\Http\Controllers\{
 */
 
 Route::get('/', function () {
-    return view('auth.login');
-});
+    return view('auth.homepage');
+})->name('auth.homepage');
 
 Route::resource('/inventaris', InventarisController::class)->middleware('auth');
 Route::resource('/peminjaman', PeminjamanController::class)->middleware('auth');
