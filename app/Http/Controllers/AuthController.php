@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventaris;
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
@@ -90,16 +92,43 @@ class AuthController extends Controller
         $auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('auth.login');
+        return redirect()->route('auth.homepage');
     }
 
     //dashboard
-    public function dashboard()
+    public function dashboard(Inventaris $inventaris, Peminjaman $peminjaman)
     {
         if (Auth::check()) {
-            return view('auth.dashboard');
+            // Mengambil jumlah user pegawai
+            $countUser = User::where('id_role', 1)->count();
+            // Mengambil jumlah user petugas
+            $countPetugas = User::where('id_role', 2)->count();
+            // Mengambil jumlah user admin
+            $countAdmin = User::where('id_role', 3)->count();
+
+            $inventaris = Inventaris::all();
+            $peminjaman = Peminjaman::all();
+            return view('auth.dashboard', compact('inventaris', 'peminjaman', 'countUser', 'countPetugas', 'countAdmin'));
         }
 
         return redirect()->route('auth.login');
+    }
+
+    //homepage
+    public function homepage(Inventaris $inventaris, Peminjaman $peminjaman)
+    {
+        // Mengambil jumlah user pegawai
+        $countUser = User::where('id_role', 1)->count();
+        // Mengambil jumlah user petugas
+        $countPetugas = User::where('id_role', 2)->count();
+        // Mengambil jumlah user admin
+        $countAdmin = User::where('id_role', 3)->count();
+
+        // Mengambil data inventaris
+        $countBarang = Inventaris::count();
+
+        $inventaris = Inventaris::all();
+        $peminjaman = Peminjaman::all();
+        return view('auth.homepage', compact('inventaris', 'peminjaman', 'countUser', 'countPetugas', 'countAdmin', 'countBarang'));
     }
 }

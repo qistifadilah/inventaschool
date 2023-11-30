@@ -14,9 +14,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="{{ route('peminjaman.index') }}">
-                            Peminjaman
-                        </a>
+                        Peminjaman
                     </li>
                 </ol>
             </nav>
@@ -24,15 +22,15 @@
     </div>
     <section class="section">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header pb-2">
                 <div class="row">
-                    <div class="col-6 d-flex">
+                    <div class="col-9 d-flex">
                         <h5 class="card-title">
                             Data Peminjaman
                         </h5>
                     </div>
                     @cannot('isPetugas')
-                        <div class="col-6 d-flex justify-content-end">
+                        <div class="col-3 d-flex">
                             <a href="{{ route('peminjaman.create') }}" class="btn btn-primary">
                                 <i class="bi bi-plus-lg"></i>
                                 Peminjaman
@@ -101,16 +99,44 @@
                                             data-toggle="tooltip" data-placement="top" title="edit">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <form action="{{ route('peminjaman.destroy', $value->id) }}" method="POST"
-                                            class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger" data-toggle="tooltip" data-placement="top"
-                                                title="delete"
-                                                onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal{{ $value->id }}"
+                                            data-peminjaman-id="{{ $value->id }}">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal{{ $value->id }}" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                                role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-danger">
+                                                        <h5 class="modal-title white" id="exampleModalLabel">Konfirmasi</h5>
+                                                        <button type="button" class="close" data-bs-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <i data-feather="x"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Anda yakin ingin menghapus <strong>{{ $value->kode }}</strong>?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <form id="deleteForm{{ $value->id }}"
+                                                            action="{{ route('peminjaman.destroy', $value->id) }}"
+                                                            method="POST" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger"
+                                                                onclick="deletePeminjaman({{ $value->id }})">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endcan
                                 </td>
                             </tr>
@@ -124,4 +150,13 @@
             </div>
         </div>
     </section>
+    <script>
+        function deletePeminjaman(id) {
+            // Ambil ID Peminjaman dari tombol delete
+            var PeminjamanId = id;
+
+            // Hapus Peminjaman sesuai ID
+            document.getElementById('deleteForm' + PeminjamanId).submit();
+        }
+    </script>
 @endsection

@@ -14,9 +14,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="{{ route('jenis.index') }}">
-                            Jenis
-                        </a>
+                        Jenis
                     </li>
                 </ol>
             </nav>
@@ -24,10 +22,20 @@
     </div>
     <section class="section">
         <div class="card">
-            <div class="card-header pt-3 pb-2 mb-2">
-                <h5 class="card-title">
-                    Data Jenis
-                </h5>
+            <div class="card-header pb-2">
+                <div class="row">
+                    <div class="col-9 d-flex">
+                        <h5 class="card-title">
+                            Data Jenis
+                        </h5>
+                    </div>
+                    <div class="col-3 d-flex">
+                        <a href="{{ route('jenis.create') }}" class="btn btn-primary">
+                            <i class="bi bi-plus-lg"></i>
+                            Jenis
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <table class="table" id="table1">
@@ -72,12 +80,6 @@
                         @endforelse
                     </tbody>
                 </table>
-            </div>
-            <div class="card-footer">
-                <a href="{{ route('jenis.create') }}" class="btn btn-primary">
-                    <i class="bi bi-plus-lg"></i>
-                    Jenis
-                </a>
             </div>
         </div>
     </section>

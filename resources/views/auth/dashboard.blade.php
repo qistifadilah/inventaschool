@@ -1,270 +1,229 @@
 @extends('layouts.main')
 @section('title', 'Dashboard')
+
 @section('content')
-    <div class="page-heading">
-        <h3>Dashboard</h3>
+    <header class="bg-primary mb-3 py-3">
+        <div class="container">
+            <h4 class="text-white text-center">
+                Selamat Datang {{ Auth::user()->name }} di InventaSchool !
+            </h4>
+        </div>
+    </header>
+    <div class="content-wrapper container">
+        <div class="page-content">
+            <section class="row justify-content-between">
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body py-4">
+                            <div class="d-flex align-items-center">
+                                <div class="stats-icon green mb-2">
+                                    <i class="iconly-boldProfile"></i>
+                                </div>
+                                <div class="ms-3 name">
+                                    <h5 class="font-bold">Pegawai</h5>
+                                    <h6 class="text-muted mb-0">{{ $countUser }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body py-4">
+                            <div class="d-flex align-items-center">
+                                <div class="stats-icon blue mb-2">
+                                    <i class="iconly-boldProfile"></i>
+                                </div>
+                                <div class="ms-3 name">
+                                    <h5 class="font-bold">Petugas</h5>
+                                    <h6 class="text-muted mb-0">{{ $countPetugas }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body py-4">
+                            <div class="d-flex align-items-center">
+                                <div class="stats-icon purple mb-2">
+                                    <i class="iconly-boldProfile"></i>
+                                </div>
+                                <div class="ms-3 name">
+                                    <h5 class="font-bold">Admin</h5>
+                                    <h6 class="text-muted mb-0">{{ $countAdmin }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
     <div class="page-content">
         <section class="row">
-            <div class="col-12 col-lg-9">
-                <div class="row">
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon purple mb-2">
-                                            <i class="iconly-boldShow"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Profile Views</h6>
-                                        <h6 class="font-extrabold mb-0">112.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon blue mb-2">
-                                            <i class="iconly-boldProfile"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Followers</h6>
-                                        <h6 class="font-extrabold mb-0">183.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon green mb-2">
-                                            <i class="iconly-boldAdd-User"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Following</h6>
-                                        <h6 class="font-extrabold mb-0">80.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon red mb-2">
-                                            <i class="iconly-boldBookmark"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Saved Post</h6>
-                                        <h6 class="font-extrabold mb-0">112</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Profile Visit</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="chart-profile-visit"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-xl-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Profile Visit</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-7">
-                                        <div class="d-flex align-items-center">
-                                            <svg class="bi text-primary" width="32" height="32" fill="blue"
-                                                style="width:10px">
-                                                <use
-                                                    xlink:href="{{ asset('assets/static/images/bootstrap-icons.svg#circle-fill') }}" />
-                                            </svg>
-                                            <h5 class="mb-0 ms-3">Europe</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-5">
-                                        <h5 class="mb-0 text-end">862</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <div id="chart-europe"></div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-7">
-                                        <div class="d-flex align-items-center">
-                                            <svg class="bi text-success" width="32" height="32" fill="blue"
-                                                style="width:10px">
-                                                <use
-                                                    xlink:href="{{ asset('dist/assets/static/images/bootstrap-icons.svg#circle-fill') }}" />
-                                            </svg>
-                                            <h5 class="mb-0 ms-3">America</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-5">
-                                        <h5 class="mb-0 text-end">375</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <div id="chart-america"></div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-7">
-                                        <div class="d-flex align-items-center">
-                                            <svg class="bi text-danger" width="32" height="32" fill="blue"
-                                                style="width:10px">
-                                                <use
-                                                    xlink:href="{{ asset('dist/assets/static/images/bootstrap-icons.svg#circle-fill') }}" />
-                                            </svg>
-                                            <h5 class="mb-0 ms-3">Indonesia</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-5">
-                                        <h5 class="mb-0 text-end">1025</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <div id="chart-indonesia"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-xl-8">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Latest Comments</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-lg">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Comment</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="col-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="{{ asset('dist/assets/compiled/jpg/5.jpg') }}">
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0">Si Cantik</p>
-                                                    </div>
-                                                </td>
-                                                <td class="col-auto">
-                                                    <p class=" mb-0">Congratulations on your graduation!</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="{{ asset('dist/assets/compiled/jpg/2.jpg') }}">
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0">Si Ganteng</p>
-                                                    </div>
-                                                </td>
-                                                <td class="col-auto">
-                                                    <p class=" mb-0">Wow amazing design! Can you make another
-                                                        tutorial for
-                                                        this design?</p>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-3">
+            <div class="col-12">
                 <div class="card">
-                    <div class="card-body py-4 px-4">
-                        <div class="d-flex align-items-center">
-                            <div class="avatar avatar-xl">
-                                <img src="{{ asset('dist/assets/compiled/jpg/5.jpg') }}" alt="Face 1">
+                    <div class="card-header pb-2">
+                        <div class="row">
+                            <div class="col-9 d-flex">
+                                <h5 class="card-title">
+                                    Data Inventaris
+                                </h5>
                             </div>
-                            <div class="ms-3 name">
-                                <h5 class="font-bold">{{ Auth::user()->name }}</h5>
-                                <h6 class="text-muted text-break mb-0">{{ Auth::user()->email }}</h6>
-                            </div>
+                            @can('isUser')
+                                <div class="col-3 d-flex">
+                                    <a href="{{ route('peminjaman.create') }}" class="btn btn-primary">
+                                        <i class="bi bi-plus-lg"></i>
+                                        Peminjaman
+                                    </a>
+                                </div>
+                            @endcan
+                            @cannot('isUser')
+                                <div class="col-3 d-flex">
+                                    <a href="{{ route('inventaris.create') }}" class="btn btn-primary">
+                                        <i class="bi bi-plus-lg"></i>
+                                        Inventaris
+                                    </a>
+                                </div>
+                            @endcannot
                         </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Recent Messages</h4>
-                    </div>
-                    <div class="card-content pb-4">
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('dist/assets/compiled/jpg/4.jpg') }}">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Hank Schrader</h5>
-                                <h6 class="text-muted mb-0">@johnducky</h6>
-                            </div>
-                        </div>
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('dist/assets/compiled/jpg/5.jpg') }}">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Dean Winchester</h5>
-                                <h6 class="text-muted mb-0">@imdean</h6>
-                            </div>
-                        </div>
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('dist/assets/compiled/jpg/1.jpg') }}">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">John Dodol</h5>
-                                <h6 class="text-muted mb-0">@dodoljohn</h6>
-                            </div>
-                        </div>
-                        <div class="px-4">
-                            <button class='btn btn-block btn-xl btn-outline-primary font-bold mt-3'>Start
-                                Conversation</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Visitors Profile</h4>
                     </div>
                     <div class="card-body">
-                        <div id="chart-visitors-profile"></div>
+                        <table class="table" id="table1">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Barang</th>
+                                    <th>Kondisi</th>
+                                    <th>Stok</th>
+                                    <th>Ruang</th>
+                                    <th>Tanggal Register</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($inventaris as $key => $value)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $value->nama_barang }}</td>
+                                        <td>{{ $value->kondisi }}</td>
+                                        <td>{{ $value->stok }}</td>
+                                        <td>{{ $value->ruang->nama_ruang }}</td>
+                                        <td>{{ $value->tanggal_register }}</td>
+                                        <td>
+                                            <a href="{{ route('inventaris.show', $value->id) }}" class="btn btn-info"
+                                                data-toggle="tooltip" data-placement="top" title="info">
+                                                <i class="bi bi-info-circle"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td>Data masih kosong</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </section>
+        @cannot('isUser')
+            <section class="row">
+                <div class="card">
+                    <div class="card-header pb-2">
+                        <div class="row">
+                            <div class="col-12 d-flex">
+                                <h5 class="card-title">
+                                    Data Peminjaman
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table" id="table1">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    @cannot('isUser')
+                                        <th>Nama Pegawai</th>
+                                    @endcannot
+                                    <th>Nama Barang</th>
+                                    <th>Tanggal Pinjam</th>
+                                    <th>Tanggal Kembali</th>
+                                    @can('isUser')
+                                        <th>Nama Petugas</th>
+                                    @endcan
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($peminjaman as $key => $value)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        @cannot('isUser')
+                                            <td>{{ $value->user->name }}</td>
+                                        @endcannot
+                                        <td>{{ $value->inventaris->nama_barang }}</td>
+                                        <td>{{ $value->tanggal_pinjam }}</td>
+                                        <td>{{ $value->tanggal_kembali ?? 'N/A' }}</td>
+                                        @can('isUser')
+                                            <td>
+                                                @if ($value->id_petugas)
+                                                    {{ $petugas[$value->id_petugas]->name }}
+                                                @else
+                                                    N/A
+                                                @endif
+                                            </td>
+                                        @endcan
+                                        <td>
+                                            @if ($value->status == 1)
+                                                <span class="badge bg-warning text-white">dipinjam</span>
+                                            @elseif($value->status == 2)
+                                                <span class="badge bg-success text-white">dikembalikan</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @can('isPetugas')
+                                                <a href="{{ route('peminjaman.edit', $value->id) }}" class="btn btn-warning"
+                                                    data-toggle="tooltip" data-placement="top" title="edit">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                            @endcan
+                                            <a href="{{ route('peminjaman.show', $value->id) }}" class="btn btn-info"
+                                                data-toggle="tooltip" data-placement="top" title="print">
+                                                <i class="bi bi-printer"></i>
+                                            </a>
+                                            @can('isAdmin')
+                                                <a href="{{ route('peminjaman.edit', $value->id) }}" class="btn btn-warning"
+                                                    data-toggle="tooltip" data-placement="top" title="edit">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <form action="{{ route('peminjaman.destroy', $value->id) }}" method="POST"
+                                                    class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                                                        title="delete"
+                                                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td>Data masih kosong</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        @endcannot
     </div>
 @endsection

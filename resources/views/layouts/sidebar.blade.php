@@ -3,8 +3,8 @@
         <div class="sidebar-header position-relative pb-0">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="index.html"><img src="{{ asset('img/logo.png') }}" style="width: 198.12px; height: 30px"
-                            alt="Logo" srcset=""></a>
+                    <a href="{{ route('auth.dashboard') }}"><img src="{{ asset('img/logo.png') }}"
+                            style="width: 198.12px; height: 30px" alt="Logo" srcset=""></a>
                 </div>
             </div>
             <div class="theme-toggle d-flex gap-2 justify-content-center align-items-center mt-3">
@@ -38,8 +38,10 @@
             </div>
             <hr>
             <div class="text text-center">
-            <h5>Hi, {{ Auth::user()->name }}</h5>
-            <p class="text-sm text-muted">{{ Auth::user()->email }}</p>
+                <a href="{{ route('auth.profile') }}">
+                    <h5>Hi, {{ Auth::user()->name }}</h5>
+                    <p class="text-sm text-muted">{{ Auth::user()->email }}</p>
+                </a>
             </div>
             <div class="sidebar-toggler  x">
                 <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>

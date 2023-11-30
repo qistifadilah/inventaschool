@@ -1078,7 +1078,15 @@
                                         </button>
 
                                         <!--Danger theme Modal -->
-                                        <div class="modal fade text-left" id="danger" tabindex="-1" role="dialog"
+                                        <div class="modal fade text-left" <script>
+    function deleteInventaris(id) {
+        // Ambil ID inventaris dari tombol delete
+        var inventarisId = id;
+
+        // Hapus inventaris sesuai ID
+        document.getElementById('deleteForm' + inventarisId).submit();
+    }
+</script> tabindex="-1" role="dialog"
                                             aria-labelledby="myModalLabel120" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                                 role="document">

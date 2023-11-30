@@ -1,9 +1,9 @@
 @extends('layouts.main')
-@section('title', 'Ruang')
+@section('title', 'Pegawai')
 @section('content')
     <div class="row mb-2">
         <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Ruang</h3>
+            <h3>Pegawai</h3>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -14,7 +14,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        Ruang
+                        Pegawai
                     </li>
                 </ol>
             </nav>
@@ -25,16 +25,10 @@
         <div class="card">
             <div class="card-header pb-2">
                 <div class="row">
-                    <div class="col-9 d-flex">
+                    <div class="col-6 d-flex">
                         <h5 class="card-title">
-                            Data Ruang
+                            Data Pegawai
                         </h5>
-                    </div>
-                    <div class="col-3 d-flex">
-                        <a href="{{ route('ruang.create') }}" class="btn btn-primary">
-                            <i class="bi bi-plus-lg"></i>
-                            Ruang
-                        </a>
                     </div>
                 </div>
             </div>
@@ -44,27 +38,20 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama Ruang</th>
-                            <th>Kode Ruang</th>
+                            <th>NIP</th>
+                            <th>Nama Pegawai</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($ruangs as $key => $value)
+                        @forelse ($users as $key => $value)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{ $value->nama_ruang }}</td>
-                                <td>{{ $value->kode_ruang }}</td>
+                                <td>{{ $value->profile->nip }}</td>
+                                <td>{{ $value->name }}</td>
                                 <td>
-                                    <a href="{{ route('ruang.show', $value->id) }}" class="btn btn-info"
-                                        data-toggle="tooltip" data-placement="top" title="info">
-                                        <i class="bi bi-info-circle"></i>
-                                    </a>
-                                    <a href="{{ route('ruang.edit', $value->id) }}" class="btn btn-warning"
-                                        data-toggle="tooltip" data-placement="top" title="edit">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <form action="{{ route('ruang.destroy', $value->id) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('petugas.destroy', $value->id) }}" method="POST"
+                                        class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger" data-toggle="tooltip" data-placement="top"

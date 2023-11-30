@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'petugas')
+@section('title', 'Petugas')
 @section('content')
     <div class="row mb-2">
         <div class="col-12 col-md-6 order-md-1 order-last">
@@ -14,9 +14,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="{{ route('petugas.index') }}">
-                            Petugas
-                        </a>
+                        Petugas
                     </li>
                 </ol>
             </nav>
@@ -25,10 +23,20 @@
     <section class="section">
         {{-- card --}}
         <div class="card">
-            <div class="card-header pt-3 pb-2 mb-2">
-                <h5 class="card-title">
-                    Data Petugas
-                </h5>
+            <div class="card-header pb-2">
+                <div class="row">
+                    <div class="col-9 d-flex">
+                        <h5 class="card-title">
+                            Data Petugas
+                        </h5>
+                    </div>
+                    <div class="col-2 d-flex">
+                        <a href="{{ route('petugas.create') }}" class="btn btn-primary">
+                            <i class="bi bi-plus-lg"></i>
+                            Petugas
+                        </a>
+                    </div>
+                </div>
             </div>
             {{-- card body --}}
             <div class="card-body">
@@ -48,7 +56,8 @@
                                 <td>{{ $value->profile->nip }}</td>
                                 <td>{{ $value->name }}</td>
                                 <td>
-                                   <form action="{{ route('petugas.destroy', $value->id) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('petugas.destroy', $value->id) }}" method="POST"
+                                        class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger" data-toggle="tooltip" data-placement="top"
@@ -68,12 +77,6 @@
                 </table>
             </div>
             {{-- end card body --}}
-            <div class="card-footer">
-                <a href="{{ route('petugas.create') }}" class="btn btn-primary">
-                    <i class="bi bi-plus-lg"></i>
-                    Petugas
-                </a>
-            </div>
         </div>
         {{-- end card --}}
     </section>

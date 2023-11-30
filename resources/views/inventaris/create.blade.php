@@ -68,6 +68,7 @@
                     <select name="kondisi" id="kondisi" class="form-select @error('kondisi') is-invalid @enderror">
                         <option disabled selected>--Pilih Salah Satu--</option>
                         <option>Baik</option>
+                        <option>Rusak</option>
                     </select>
                 </div>
                 @error('kondisi')

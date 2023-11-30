@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Hash;
 
 class PetugasController extends Controller
 {
+    public function pegawai()
+    {
+        //
+        $profile = Profile::all();
+        $users = User::where('id_role', 1)->get();
+        return view('petugas.pegawai', compact('users'));
+    }
+
     /**
      * Display a listing of the resource.
      */

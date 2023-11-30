@@ -36,7 +36,7 @@
             <div class="form-group">
                     <label for="kode">Kode Peminjaman</label>
                     <input type="text" id="kode" class="form-control @error('kode') is-invalid @enderror"
-                        name="kode" value="{{ $peminjaman->kode }}" placeholder="Masukan Kode Peminjaman" disabled>
+                        name="kode" value="{{ $peminjaman->kode }}" placeholder="Masukan Kode Peminjaman" readonly>
                 </div>
                 @error('kode')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -46,7 +46,7 @@
                 <input type="hidden" id="id_user" class="form-control @error('id_user') is-invalid @enderror"
                     name="id_user" value="{{ $peminjaman->user->id }}">
                 <input type="text" id="id_user" class="form-control @error('id_user') is-invalid @enderror"
-                    value="{{ $peminjaman->user->name }}" disabled>
+                    value="{{ $peminjaman->user->name }}" readonly>
             </div>
             @error('id_user')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -54,7 +54,7 @@
             <div class="form-group">
                 <label for="id_petugas">Nama Petugas</label>
                 <input type="text" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
-                    name="id_petugas" value="{{ $namaPetugas }}" disabled>
+                    name="id_petugas" value="{{ $namaPetugas }}" readonly>
                 {{-- <input type="text" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
                         value="{{ auth()->user()->name }}"> --}}
             </div>
@@ -65,9 +65,8 @@
                 <label for="id_ruang">Ruang</label>
                 <select name="id_ruang" id="id_ruang" class="form-control @error('id_ruang') is-invalid @enderror"
                     disabled>
-                    <option disabled selected>--Pilih Salah Satu--</option>
                     @forelse ($ruangs as $key => $ruang)
-                        <option value="{{ $ruang->id }}">{{ $ruang->nama_ruang }}</option>
+                        <option value="{{ $ruang->id }}" selected>{{ $ruang->nama_ruang }}</option>
                     @empty
                         <option disabled>--Data Masih Kosong--</option>
                     @endforelse
@@ -94,7 +93,7 @@
             <div class="form-group">
                 <label for="stok">Stok Barang</label>
                 <input type="number" id="stok" class="form-control" name="" placeholder="Stok Barang"
-                    value="" disabled>
+                    value="" readonly>
             </div>
             @error('id_inventaris')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -102,7 +101,7 @@
             <div class="form-group">
                 <label for="jumlah">Jumlah Pinjam</label>
                 <input type="number" id="jumlah" class="form-control @error('jumlah') is-invalid @enderror"
-                    name="jumlah" placeholder="Masukan Jumlah Pinjam" value="{{ $peminjaman->jumlah }}" disabled>
+                    name="jumlah" placeholder="Masukan Jumlah Pinjam" value="{{ $peminjaman->jumlah }}" readonly>
             </div>
             @error('jumlah')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -110,20 +109,20 @@
             <div class="form-group">
                 <label for="tanggal_pinjam">Tanggal Pinjam</label>
                 <input type="date" id="tanggal_pinjam" class="form-control" name="tanggal_pinjam"
-                    placeholder="Masukan Tanggal Pinjam" value="{{ $peminjaman->tanggal_pinjam }}" disabled>
+                    placeholder="Masukan Tanggal Pinjam" value="{{ $peminjaman->tanggal_pinjam }}" readonly>
             </div>
             @error('tanggal_pinjam')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="form-group">
                 <label for="tanggal_kembali">Tanggal Kembali</label>
-                <input type="text" id="tanggal_kembali" class="form-control" name="tanggal_kembali" placeholder="N/A"
-                    value="{{ $peminjaman->tanggal_kembali }}" disabled>
+                <input type="text" id="tanggal_kembali" class="form-control" name="tanggal_kembali"
+                    value="{{ $peminjaman->tanggal_kembali ?? "N/A" }}" readonly>
             </div>
             <div class="form-group">
                 <label for="status">Status</label>
                 <input type="text" id="status" class="form-control" name="status" placeholder="N/A"
-                    value="{{ $peminjaman->status == 1 ? 'Dipinjam' : 'Dikembalikan' }}" disabled>
+                    value="{{ $peminjaman->status == 1 ? 'Dipinjam' : 'Dikembalikan' }}" readonly>
             </div>
             @error('status')
                 <div class="alert alert-danger">{{ $message }}</div>

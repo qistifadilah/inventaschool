@@ -122,8 +122,10 @@
                 @enderror
                 <div class="form-group">
                     <label for="tanggal_kembali">Tanggal Kembali</label>
-                    <input type="text" id="tanggal_kembali" class="form-control" name="tanggal_kembali"
+                    <input type="hidden" id="tanggal_kembali" class="form-control" name="tanggal_kembali"
                         placeholder="N/A" value="" readonly>
+                    <input type="text" id="tanggal_kembali" class="form-control" name="" value="N/A"
+                        disabled>
                 </div>
                 <div class="form-group">
                     <label for="status">Status</label>
@@ -167,40 +169,41 @@
             </div>
         </form>
     </div>
-<script>
-    // Event listener untuk mengubah stok berdasarkan pilihan barang
-    document.getElementById('id_ruang').addEventListener('change', function() {
-        var selectedRuang = this.value;
+    <script>
+        // Event listener untuk mengubah stok berdasarkan pilihan barang
+        document.getElementById('id_ruang').addEventListener('change', function() {
+            var selectedRuang = this.value;
 
-        // Sembunyikan semua opsi
-        Array.from(document.getElementById('id_inventaris').options).forEach(function(option) {
-            option.style.display = 'none';
-        });
+            // Sembunyikan semua opsi
+            Array.from(document.getElementById('id_inventaris').options).forEach(function(option) {
+                option.style.display = 'none';
+            });
 
-        // Tampilkan hanya opsi dengan ruang yang cocok
-        Array.from(document.querySelectorAll('#id_inventaris [data-ruang]')).forEach(function(option) {
-            if (option.getAttribute('data-ruang') === selectedRuang || selectedRuang === "") {
-                option.style.display = '';
+            // Tampilkan hanya opsi dengan ruang yang cocok
+            Array.from(document.querySelectorAll('#id_inventaris [data-ruang]')).forEach(function(option) {
+                if (option.getAttribute('data-ruang') === selectedRuang || selectedRuang === "") {
+                    option.style.display = '';
+                }
+            });
+
+            // Atur nilai stok untuk opsi pertama yang terlihat
+            var visibleOptions = Array.from(document.getElementById('id_inventaris').options).filter(function(
+                option) {
+                return option.style.display !== 'none';
+            });
+
+            if (visibleOptions.length > 0) {
+                document.getElementById('stok').value = visibleOptions[0].getAttribute('data-stok');
+            } else {
+                document.getElementById('stok').value = '';
             }
         });
 
-        // Atur nilai stok untuk opsi pertama yang terlihat
-        var visibleOptions = Array.from(document.getElementById('id_inventaris').options).filter(function(option) {
-            return option.style.display !== 'none';
-        });
-
-        if (visibleOptions.length > 0) {
-            document.getElementById('stok').value = visibleOptions[0].getAttribute('data-stok');
-        } else {
-            document.getElementById('stok').value = '';
-        }
-    });
-
-    document.getElementById('id_inventaris').addEventListener('change', function() {
+        document.getElementById('id_inventaris').addEventListener('change', function() {
             var selectedOption = this.options[this.selectedIndex];
             document.getElementById('stok').value = selectedOption.getAttribute('data-stok');
         });
-</script>
+    </script>
 
 
 
