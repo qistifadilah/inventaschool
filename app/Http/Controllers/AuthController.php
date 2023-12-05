@@ -129,6 +129,6 @@ class AuthController extends Controller
 
         $inventaris = Inventaris::all();
         $peminjaman = Peminjaman::all();
-        return view('auth.homepage', compact('inventaris', 'peminjaman', 'countUser', 'countPetugas', 'countAdmin', 'countBarang'));
+        return view('auth.landing_page', compact('inventaris', 'peminjaman', 'countUser', 'countPetugas', 'countAdmin', 'countBarang'));
     }
 }

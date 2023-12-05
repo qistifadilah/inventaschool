@@ -38,7 +38,7 @@ class Inventaris extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user', 'id');
+        return $this->belongsToMany(User::class, 'id_user', 'id');
     }
 
     public function laporan()

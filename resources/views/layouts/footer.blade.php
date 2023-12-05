@@ -5,7 +5,7 @@
         </div>
         <div class="float-end">
             <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                by <a href="#">Qisti Fadilah</a></p>
+                by <a href="https://www.instagram.com/qu_qiss/">Qisti Fadilah</a></p>
         </div>
     </div>
 </footer>

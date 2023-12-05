@@ -57,8 +57,6 @@
                     <label for="id_petugas">Nama Petugas</label>
                     <input type="hidden" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
                         name="id_petugas" value="">
-                    <input type="text" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
-                        value="N/A" disabled>
                 </div>
                 @error('id_petugas')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -124,8 +122,6 @@
                     <label for="tanggal_kembali">Tanggal Kembali</label>
                     <input type="hidden" id="tanggal_kembali" class="form-control" name="tanggal_kembali"
                         placeholder="N/A" value="" readonly>
-                    <input type="text" id="tanggal_kembali" class="form-control" name="" value="N/A"
-                        disabled>
                 </div>
                 <div class="form-group">
                     <label for="status">Status</label>
@@ -147,11 +143,6 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                {{-- <div class="form-group">
-                    <label for="id">Nama Petugas</label>
-                    <input type="text" id="id" class="form-control" name="id"
-                        placeholder="Masukan Nama Petugas">
-                </div> --}}
             </div>
 
             {{-- card footer --}}
