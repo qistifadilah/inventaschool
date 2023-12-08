@@ -56,14 +56,15 @@
                 @enderror
                 <div class="form-group">
                     <label for="id_petugas">Nama Petugas</label>
-                    {{-- <input type="text" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
-                        name="id_petugas" value="{{ $namaPetugas }}"> --}}
-                    {{-- <input type="text" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
-                        value="{{ auth()->user()->name }}"> --}}
-                    <input type="hidden" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
-                        name="id_petugas" value="{{ auth()->user()->id }}">
-                    <input type="text" id="" class="form-control @error('id_petugas') is-invalid @enderror"
-                        value="{{ auth()->user()->name }}" disabled>
+                    <select name="id_petugas" id="id_petugas" class="form-select @error('id_petugas') is-invalid @enderror">
+                        @forelse ($user as $key => $petugas)
+                            @if ($petugas->id_role == 2)
+                                <option value="{{ $peminjaman->id_user}}" selected>{{ $petugas->name }}</option>
+                            @endif
+                        @empty
+                            <option disabled>--Data Masih Kosong--</option>
+                        @endforelse
+                    </select>
                 </div>
                 @error('id_petugas')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -71,7 +72,6 @@
                 <div class="form-group">
                     <label for="id_ruang">Ruang</label>
                     <select name="id_ruang" id="id_ruang" class="form-control @error('id_ruang') is-invalid @enderror" disabled>
-                        <option disabled selected>--Pilih Salah Satu--</option>
                         @forelse ($ruangs as $key => $ruang)
                             <option value="{{ $ruang->id }}">{{ $ruang->nama_ruang }}</option>
                         @empty

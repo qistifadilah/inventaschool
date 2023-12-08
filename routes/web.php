@@ -9,6 +9,7 @@ use App\Http\Controllers\{
     ProfileController,
     PetugasController,
     AuthController,
+    GenerateController,
 };
 
 /*
@@ -21,6 +22,8 @@ use App\Http\Controllers\{
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/peminjaman/{peminjaman}/print', [GenerateController::class, 'generatePDF'])->name('cetak');
 
 Route::get('/', [AuthController::class, 'homepage'])->middleware('guest')->name('auth.homepage');
 
@@ -46,6 +49,9 @@ Route::middleware(['auth', 'can:isPetugas'])->group(
 
 Route::middleware(['auth', 'can:isAdmin'])->group(
     function () {
+        // ->except(['store', 'update', 'edit'])
+        Route::resource('peminjaman', PeminjamanController::class);
+        Route::resource('inventaris', InventarisController::class);
         Route::delete('/inventaris/{inventari}', [InventarisController::class, 'destroy'])->name('inventaris.destroy');
         Route::delete('/peminjaman/{peminjaman}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
     }

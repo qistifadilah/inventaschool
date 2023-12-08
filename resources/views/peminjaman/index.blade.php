@@ -91,8 +91,8 @@
                                         </a>
                                     @endcan
                                     <a href="{{ route('peminjaman.show', $value->id) }}" class="btn btn-info"
-                                        data-toggle="tooltip" data-placement="top" title="print">
-                                        <i class="bi bi-printer"></i>
+                                        data-toggle="tooltip" data-placement="top" title="info">
+                                        <i class="bi bi-info-circle"></i>
                                     </a>
                                     @can('isAdmin')
                                         <a href="{{ route('peminjaman.edit', $value->id) }}" class="btn btn-warning"

@@ -18,7 +18,7 @@ class PeminjamanController extends Controller
     public function index()
     {
         $user = Auth::user();
-
+        
         if ($user->id_role == 1) {
             $peminjamans = Peminjaman::where('id_user', $user->id)->get();
         } elseif ($user->id_role == 2) {

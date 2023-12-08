@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Profile::class, 'id_profile', 'id');
     }
+
+    public function inventaris()
+    {
+        return $this->hasMany(Inventaris::class);
+    }
 }

@@ -57,13 +57,23 @@
                     <label for="id_petugas">Nama Petugas</label>
                     <input type="hidden" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
                         name="id_petugas" value="">
+                    <select name="id_petugas" id="id_petugas" class="form-select @error('id_petugas') is-invalid @enderror">
+                        <option disabled selected>--Pilih Salah Satu--</option>
+                        @forelse ($user as $key => $petugas)
+                            @if ($petugas->id_role == 2)
+                                <option value="{{ $petugas->id }}">{{ $petugas->name }}</option>
+                            @endif
+                        @empty
+                            <option disabled>--Data Masih Kosong--</option>
+                        @endforelse
+                    </select>
                 </div>
                 @error('id_petugas')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
                     <label for="id_ruang">Ruang</label>
-                    <select name="id_ruang" id="id_ruang" class="form-select @error('id_ruang') is-invalid @enderror">
+                    <select name="id_ruang" id="id_ruang" class="form-control @error('id_ruang') is-invalid @enderror">
                         <option disabled selected>--Pilih Salah Satu--</option>
                         @forelse ($ruangs as $key => $ruang)
                             <option value="{{ $ruang->id }}">{{ $ruang->nama_ruang }}</option>
