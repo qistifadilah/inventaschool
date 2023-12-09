@@ -65,7 +65,7 @@
                     </li>
 
                     <li class="sidebar-item @if (Request::segment(1) == 'user') active @endif">
-                        <a href="#" class="sidebar-link">
+                        <a href="{{ route('pegawai') }}" class="sidebar-link">
                             <i class="bi bi-person-badge-fill"></i>
                             <span>Data Pegawai</span>
                         </a>

@@ -135,6 +135,9 @@ class PeminjamanController extends Controller
         $inventaris = $inventaris::all();
         $user       = $user::all();
         $ruangs     = Ruang::all();
+        foreach ($ruangs as $ruang) {
+            $id = $ruang->id; // Correct - Accessing id from each model instance in the loop
+        }
 
         // Mendapatkan user dengan ID petugas yang sesuai
         $petugas = $user->firstWhere('id', $peminjaman->id_petugas);
@@ -142,7 +145,7 @@ class PeminjamanController extends Controller
         // Mendapatkan nama petugas
         $namaPetugas = $petugas ? $petugas->name : 'N/A';
 
-        return view('peminjaman.show', compact('peminjaman', 'inventaris', 'user', 'ruangs', 'namaPetugas'));
+        return view('peminjaman.show', compact('peminjaman', 'inventaris', 'user', 'ruang', 'namaPetugas'));
     }
 
     /**

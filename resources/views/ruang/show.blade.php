@@ -27,7 +27,7 @@
     <div class="card">
 
         {{-- card-header --}}
-        <div class="card-header bg-light-info pt-3 pb-2 mb-2">
+        <div class="card-header bg-light-info pt-3 pb-2 mb-2 text-center">
             <h4 class="card-title">Data Ruang</h4>
         </div>
 

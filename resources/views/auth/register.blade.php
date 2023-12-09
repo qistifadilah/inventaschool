@@ -11,7 +11,7 @@
     <section class="section my-5">
         <div class="container my-auto">
             <div class="row justify-content-center">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     {{-- card --}}
                     <div class="card">
                         <div class="card-header text-center">
@@ -24,7 +24,7 @@
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
                                             <input type="text" class="form-control" placeholder="Name"
-                                                id="first-name-horizontal-icon" name="name">
+                                                id="first-name-horizontal-icon" value="{{ old('name') }}" name="name">
                                             <div class="form-control-icon">
                                                 <i class="fa fa-user"></i>
                                             </div>
@@ -38,7 +38,7 @@
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
                                             <input type="email" class="form-control" placeholder="Email"
-                                                id="email-horizontal-icon" name="email">
+                                                id="email-horizontal-icon" value="{{ old('email') }}" name="email">
                                             <div class="form-control-icon">
                                                 <i class="fa fa-envelope"></i>
                                             </div>
@@ -52,7 +52,7 @@
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
                                             <input type="password" class="form-control" placeholder="Password"
-                                                id="password-horizontal-icon" name="password">
+                                                id="password-horizontal-icon" value="{{ old('password') }}" name="password">
                                             <div class="form-control-icon">
                                                 <i class="fa fa-lock"></i>
                                             </div>
@@ -66,7 +66,7 @@
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
                                             <input type="number" class="form-control" placeholder="NIP"
-                                                id="contact-info-horizontal-icon" name="nip">
+                                                id="contact-info-horizontal-icon" value="{{ old('nip') }}" name="nip">
                                             <div class="form-control-icon">
                                                 <i class="fa fa-address-card"></i>
                                             </div>
@@ -79,7 +79,7 @@
                                 <div class="row">
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
-                                            <textarea class="form-control" placeholder="Alamat" id="horizontal-icon" name="alamat"></textarea>
+                                            <textarea class="form-control" placeholder="Alamat" id="horizontal-icon" value="{{ old('alamat') }}" name="alamat"></textarea>
                                             <div class="form-control-icon">
                                                 <i class="fa fa-home"></i>
                                             </div>

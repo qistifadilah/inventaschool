@@ -64,7 +64,7 @@ Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('peminja
 
 Route::get('/profile', [ProfileController::class, 'show'])->name('auth.profile')->middleware('auth');
 Route::resource('/petugas', PetugasController::class)->middleware(['can:isAdmin', 'auth']);
-Route::get('/pegawai', [PetugasController::class, 'pegawai'])->middleware(['can:isAdmin', 'auth']);
+Route::get('/pegawai', [PetugasController::class, 'pegawai'])->name('pegawai')->middleware(['can:isAdmin', 'auth']);
 Route::resource('/jenis', JenisController::class)->middleware(['can:isAdmin', 'auth']);
 Route::resource('/ruang', RuangController::class)->middleware(['can:isAdmin', 'auth']);
 

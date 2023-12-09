@@ -10,7 +10,8 @@
         </div>
     </header>
     <div class="content-wrapper container">
-        <div class="page-content">
+        @can('isAdmin')
+            <div class="page-content">
             <section class="row justify-content-between">
                 <div class="col-4">
                     <div class="card">
@@ -59,6 +60,7 @@
                 </div>
             </section>
         </div>
+        @endcan
     </div>
     <div class="page-content">
         <section class="row">
@@ -193,8 +195,8 @@
                                                 </a>
                                             @endcan
                                             <a href="{{ route('peminjaman.show', $value->id) }}" class="btn btn-info"
-                                                data-toggle="tooltip" data-placement="top" title="print">
-                                                <i class="bi bi-printer"></i>
+                                                data-toggle="tooltip" data-placement="top" title="show">
+                                                <i class="bi bi-info-circle"></i>
                                             </a>
                                             @can('isAdmin')
                                                 <a href="{{ route('peminjaman.edit', $value->id) }}" class="btn btn-warning"

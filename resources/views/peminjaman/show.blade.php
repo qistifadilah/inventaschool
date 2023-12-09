@@ -31,9 +31,22 @@
                 <div class="col-md-12 col-12">
                     <div class="card">
                         {{-- card-header --}}
-                        <div class="card-header bg-light-info pt-3 pb-2 mb-2 text-center">
-                            <h4 class="card-title">Bukti Peminjaman</h4>
+                        <div class="card-header bg-light-info pt-2 pb-2 mb-2">
+                            <div class="row">
+                                <div class="col-11 text-center">
+                                    <h4 class="card-title pt-2 mb-0">Bukti Peminjaman</h4>
+                                </div>
+                                <div class="col-1 justify-content-end">
+                                    @cannot('isUser')
+                                        <a href="{{ route('cetak', $peminjaman->id) }}" class="btn btn-info me-3"
+                                            data-toggle="tooltip" data-placement="top" title="Print">
+                                            <i class="bi bi-printer"></i>
+                                        </a>
+                                    @endcannot
+                                </div>
+                            </div>
                         </div>
+
 
                         {{-- card-body --}}
                         <div class="card-body mt-3 pb-0">
@@ -78,15 +91,9 @@
                                             <label for="id_ruang">Ruang</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <select name="id_ruang" id="id_ruang"
-                                                class="form-control @error('id_ruang') is-invalid @enderror" readonly>
-                                                @forelse ($ruangs as $key => $ruang)
-                                                    <option value="{{ $ruang->id }}" selected>
-                                                        {{ $ruang->nama_ruang }}</option>
-                                                @empty
-                                                    <option disabled>--Data Masih Kosong--</option>
-                                                @endforelse
-                                            </select>
+                                            <input type="text" id="id_ruang_input"
+                                                class="form-control @error('id_ruang') is-invalid @enderror" name="id_ruang"
+                                                value="{{ $ruang->nama_ruang }}" readonly>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="id_inventaris">Nama Barang</label>
@@ -101,7 +108,7 @@
                                             @else
                                                 <input type="text" id="id_inventaris_input" class="form-control"
                                                     value="Data Masih Kosong" readonly>
-                                            @endif  
+                                            @endif
                                         </div>
                                         @error('id_inventaris')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -166,10 +173,6 @@
                         <div class="card-footer bg-body-tertiary" style="border: none;">
                             <div class="row">
                                 <div class="col-6 d-flex justify-content-start">
-                                    @cannot('isUser')
-                                        <input type="button" class="btn btn-info me-2" value="Print"
-                                            onclick="window.location.href='{{ route('cetak', $peminjaman->id) }}'">
-                                    @endcannot
                                     <input type="button" class="btn btn-info" value="Back"
                                         onclick="window.location.href='{{ route('peminjaman.index') }}'">
                                 </div>
@@ -185,23 +188,22 @@
             // Ambil elemen stok, id_inventaris, id_ruang, dan nama_ruang
             var stokInput = document.getElementById('stok');
             var idInventarisInput = document.getElementById('id_inventaris_input');
-            var idRuangDisplay = document.getElementById('id_ruang');
+            var idRuangInput = document.getElementById('id_ruang_input');
             var namaRuangDisplay = document.getElementById('nama_ruang');
 
             // Fungsi untuk mengatur nilai stok, id_ruang, dan nama_ruang saat halaman dimuat
             function setStokAndRuang() {
                 var stok = idInventarisInput.getAttribute('data-stok') || '';
-                var idRuang = idInventarisInput.getAttribute('data-ruang') || '';
+                var idRuang = idRuangInput.value || '';
                 stokInput.value = stok;
-                idRuangDisplay.value = idRuang;
                 namaRuangDisplay.value = getNamaRuang(idRuang) || '';
             }
 
             // Panggil fungsi setStokAndRuang saat halaman dimuat
             setStokAndRuang();
 
-            // Tambahkan event listener untuk merespons perubahan pada input id_inventaris_input
-            idInventarisInput.addEventListener('input', setStokAndRuang);
+            // Tambahkan event listener untuk merespons perubahan pada input id_ruang_input
+            idRuangInput.addEventListener('input', setStokAndRuang);
 
             // Fungsi untuk mendapatkan nama ruang berdasarkan id ruang
             function getNamaRuang(idRuang) {

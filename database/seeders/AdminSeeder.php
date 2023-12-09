@@ -17,14 +17,14 @@ class AdminSeeder extends Seeder
     {
         //
         $profile->nip       = 005174271401;
-        $profile->alamat    = 'bekasi banget';
+        $profile->alamat    = 'gedung barat rpl';
         $profile->save();
 
         // insert data user
         $user::create([
             'name'          => 'admin',
-            'email'         => 'admin@gmail.com',
-            'password'      => Hash::make(43215678),
+            'email'         => 'admin@inv.id',
+            'password'      => Hash::make('asdfghjkl'),
             'id_profile'    => $profile->id,
             'id_role'       => 3,
         ]);
