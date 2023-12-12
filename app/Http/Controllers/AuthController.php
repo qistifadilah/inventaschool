@@ -34,7 +34,7 @@ class AuthController extends Controller
             'name'      => 'required|string|max:250',
             'email'     => 'required|email|max:250|unique:users,email',
             'password'  => 'required|min:8',
-            'nip'      => 'required|numeric',
+            'nip'      => 'required',
             'alamat'    => 'required|min:10'
         ]);
 
@@ -93,6 +93,13 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('auth.homepage');
+    }
+
+    //delete
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('petugas.pegawai');
     }
 
     //dashboard

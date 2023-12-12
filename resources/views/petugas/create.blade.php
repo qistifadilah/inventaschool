@@ -39,27 +39,42 @@
                 <div class="form-group">
                     <label for="name">Nama Petugas</label>
                     <input type="text" id="name" class="form-control" name="name"
-                        placeholder="Masukan Nama Petugas" value="">
+                        placeholder="Masukan Nama Petugas" value="{{ old('name') }}">
                 </div>
+                @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" class="form-control" name="email"
-                        placeholder="Masukan Kode Petugas" value="">
+                        placeholder="Masukan Kode Petugas" value="{{ old('email') }}">
                 </div>
+                @error('email')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" class="form-control" name="password"
-                        placeholder="Masukan Password Petugas" value="">
+                        placeholder="Masukan Password Petugas" value="{{ old('password') }}">
                 </div>
+                @error('password')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="form-group">
                     <label for="nip">NIP</label>
                     <input type="numeric" id="nip" class="form-control" name="nip"
-                        placeholder="Masukan NIP Petugas" value="">
+                        placeholder="Masukan NIP Petugas" value="{{ old('nip') }}">
                 </div>
+                @error('nip')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="form-group">
                     <label for="alamat">Alamat</label>
-                    <textarea class="form-control" placeholder="Masukan Alamat Petugas" name="alamat"></textarea>
+                    <textarea class="form-control" placeholder="Masukan Alamat Petugas" name="alamat" value="{{ old('alamat') }}"></textarea>
                 </div>
+                @error('alamat')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             {{-- card footer --}}

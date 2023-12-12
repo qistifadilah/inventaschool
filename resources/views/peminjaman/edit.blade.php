@@ -56,22 +56,18 @@
                 @enderror
                 <div class="form-group">
                     <label for="id_petugas">Nama Petugas</label>
-                    <select name="id_petugas" id="id_petugas" class="form-select @error('id_petugas') is-invalid @enderror">
-                        @forelse ($user as $key => $petugas)
-                            @if ($petugas->id_role == 2)
-                                <option value="{{ $peminjaman->id_user}}" selected>{{ $petugas->name }}</option>
-                            @endif
-                        @empty
-                            <option disabled>--Data Masih Kosong--</option>
-                        @endforelse
-                    </select>
+                    <input type="hidden" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
+                        name="id_petugas" value="{{ auth()->user()->id }}">
+                    <input type="text" id="" class="form-control @error('id_petugas') is-invalid @enderror"
+                        value="{{ auth()->user()->name }}" disabled>
                 </div>
                 @error('id_petugas')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
                     <label for="id_ruang">Ruang</label>
-                    <select name="id_ruang" id="id_ruang" class="form-control @error('id_ruang') is-invalid @enderror" disabled>
+                    <select name="id_ruang" id="id_ruang" class="form-control @error('id_ruang') is-invalid @enderror"
+                        disabled>
                         @forelse ($ruangs as $key => $ruang)
                             <option value="{{ $ruang->id }}">{{ $ruang->nama_ruang }}</option>
                         @empty
@@ -84,7 +80,8 @@
                     <select name="" id="id_inventaris"
                         class="form-control @error('id_inventaris') is-invalid @enderror" disabled>
                         @forelse ($inventaris as $key => $value)
-                            <option value="{{ $value->id }}" data-stok="{{ $value->stok }}" data-ruang="{{ $value->id_ruang }}"
+                            <option value="{{ $value->id }}" data-stok="{{ $value->stok }}"
+                                data-ruang="{{ $value->id_ruang }}"
                                 {{ $value->id == $peminjaman->id_inventaris ? 'selected' : '' }}>
                                 {{ $value->nama_barang }}
                             </option>
@@ -183,7 +180,7 @@
                 stokInput.value = selectedOption.getAttribute('data-stok') || '';
                 idRuangDisplay.value = selectedOption.getAttribute('data-ruang') || '';
                 namaRuangDisplay.value = getNamaRuang(selectedOption.getAttribute('data-ruang')) ||
-                ''; // Tambahkan ini
+                    ''; // Tambahkan ini
             }
 
             // Panggil fungsi setStokAndRuang saat halaman dimuat

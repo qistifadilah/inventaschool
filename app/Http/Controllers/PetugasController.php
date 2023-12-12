@@ -45,8 +45,8 @@ class PetugasController extends Controller
         $request->validate([
             'name'      => 'required|string|max:250',
             'email'     => 'required|email|max:250|unique:users,email',
-            'password'  => 'required|min:8',
-            'nip'      => 'required|min:8|max:8',
+            'password'  => 'required',
+            'nip'      => 'required',
             'alamat'    => 'required|min:10'
         ]);
 
@@ -64,7 +64,7 @@ class PetugasController extends Controller
             'id_role'       => 2,
         ]);
 
-        return redirect()->route('auth.dashboard');
+        return redirect()->route('petugas.index');
     }
 
     /**
@@ -94,8 +94,10 @@ class PetugasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    //delete
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('petugas.index');
     }
 }

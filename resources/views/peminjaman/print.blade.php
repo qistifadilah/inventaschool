@@ -1,166 +1,103 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <title>Bukti Pinjam</title>
-    <style>
-        @media print {
-            body {
-                margin: 0;
-                padding: 0;
-                line-height: 1.4;
-            }
-
-            .content-wrapper {
-                width: 100%;
-                padding: 20px;
-            }
-
-            .card {
-                margin-bottom: 20px;
-                border: none;
-                box-shadow: none;
-            }
-
-            .card-header {
-                background-color: #f8f9fa;
-                padding: 10px 20px;
-            }
-
-            .card-title {
-                margin-bottom: 0;
-            }
-
-            .card-body,
-            .card-footer {
-                padding: 20px;
-            }
-
-            .form-group {
-                margin-bottom: 20px;
-            }
-
-            .btn-info {
-                display: none; /* Hide Print and Back buttons */
-            }
-
-            /* Add additional styles as needed for printing */
-        }
-    </style>
+    <title>Bukti Peminjaman</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-    <div class="content-wrapper">
-        <section class="row justify-content-center mt-5">
-            <div class="col-12 col-md-8">
-                <div class="card">
-                    {{-- card-header --}}
-                    <div class="card-header bg-light-info pt-3 pb-2 mb-2 text-center">
-                        <h4 class="card-title">Bukti Peminjaman</h4>
-                    </div>
-                    {{-- card-body --}}
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="kode">Kode Peminjaman</label>
-                            <input type="text" id="kode"
-                                class="form-control @error('kode') is-invalid @enderror" name="kode"
-                                value="{{ $peminjaman->kode }}" placeholder="Masukan Kode Peminjaman" readonly>
-                        </div>
-                        @error('kode')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                        <div class="form-group">
-                            <label for="nama">Nama Pegawai</label>
-                            <input type="text" id="id_user"
-                                class="form-control @error('id_user') is-invalid @enderror"
-                                value="{{ $peminjaman->user->name }}" readonly>
-                        </div>
-                        @error('id_user')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                        <div class="form-group">
-                            <label for="id_petugas">Nama Petugas</label>
-                            <input type="text" id="id_petugas"
-                                class="form-control @error('id_petugas') is-invalid @enderror" name="id_petugas"
-                                value="{{ $namaPetugas }}" readonly>
-                            {{-- <input type="text" id="id_petugas" class="form-control @error('id_petugas') is-invalid @enderror"
-                            value="{{ auth()->user()->name }}"> --}}
-                        </div>
-                        @error('id_petugas')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                        <div class="form-group">
-                            <label for="id_ruang">Ruang</label>
-                            <select name="id_ruang" id="id_ruang"
-                                class="form-control @error('id_ruang') is-invalid @enderror" disabled>
-                                @forelse ($ruangs as $key => $ruang)
-                                    <option value="{{ $ruang->id }}" selected>{{ $ruang->nama_ruang }}</option>
-                                @empty
-                                    <option disabled>--Data Masih Kosong--</option>
-                                @endforelse
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="id_inventaris">Nama Barang</label>
-                            <select name="" id="id_inventaris"
-                                class="form-control @error('id_inventaris') is-invalid @enderror" disabled>
-                                @forelse ($inventaris as $key => $value)
-                                    <option value="{{ $value->id }}" data-stok="{{ $value->stok }}"
-                                        data-ruang="{{ $value->id_ruang }}"
-                                        {{ $value->id == $peminjaman->id_inventaris ? 'selected' : '' }}>
-                                        {{ $value->nama_barang }}
-                                    </option>
-                                @empty
-                                    <option disabled>--Data Masih Kosong--</option>
-                                @endforelse
-                            </select>
-                        </div>
-                        @error('id_inventaris')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                        <div class="form-group">
-                            <label for="stok">Stok Barang</label>
-                            <input type="number" id="stok" class="form-control" name=""
-                                placeholder="Stok Barang" value="" readonly>
-                        </div>
-                        @error('id_inventaris')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                        <div class="form-group">
-                            <label for="jumlah">Jumlah Pinjam</label>
-                            <input type="number" id="jumlah"
-                                class="form-control @error('jumlah') is-invalid @enderror" name="jumlah"
-                                placeholder="Masukan Jumlah Pinjam" value="{{ $peminjaman->jumlah }}" readonly>
-                        </div>
-                        @error('jumlah')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                        <div class="form-group">
-                            <label for="tanggal_pinjam">Tanggal Pinjam</label>
-                            <input type="date" id="tanggal_pinjam" class="form-control" name="tanggal_pinjam"
-                                placeholder="Masukan Tanggal Pinjam" value="{{ $peminjaman->tanggal_pinjam }}"
-                                readonly>
-                        </div>
-                        @error('tanggal_pinjam')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                        <div class="form-group">
-                            <label for="tanggal_kembali">Tanggal Kembali</label>
-                            <input type="text" id="tanggal_kembali" class="form-control" name="tanggal_kembali"
-                                value="{{ $peminjaman->tanggal_kembali ?? 'N/A' }}" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="status">Status</label>
-                            <input type="text" id="status" class="form-control" name="status" placeholder="N/A"
-                                value="{{ $peminjaman->status == 1 ? 'Dipinjam' : 'Dikembalikan' }}" readonly>
-                        </div>
-                        @error('status')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+    <style type="text/css">
+        table tr td,
+        table tr th {
+            font-size: 9pt;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        td {
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        hr {
+            width: 50%;
+            margin-top: 10px;
+            border: 3px solid #000;
+        }
+
+        .table2 {
+            font-size: 9pt;
+            margin-top: 200px;
+            text-align: center;
+            justify-content:space-between;
+            justify-content: center;
+        }
+    </style>
+    <center>
+        <h5>Bukti Peminjaman Sarana dan Prasarana</h5>
+        <hr>
+        <br>
+    </center>
+
+    <table class="table table-bordered">
+        <tr>
+            <td>Kode Peminjaman</td>
+            <td>{{ $peminjaman->kode }}</td>
+        </tr>
+        <tr>
+            <td>Nama Peminjam</td>
+            <td>{{ $peminjaman->user->name }}</td>
+        </tr>
+        <tr>
+            <td>Ruang</td>
+            <td>{{ $peminjaman->inventaris->ruang->nama_ruang }}</td>
+        </tr>
+        <tr>
+            <td>Nama Barang</td>
+            <td>{{ $peminjaman->inventaris->nama_barang }}</td>
+        </tr>
+        <tr>
+            <td>Stok</td>
+            <td>{{ $peminjaman->inventaris->stok }}</td>
+        </tr>
+        <tr>
+            <td>Jumlah</td>
+            <td>{{ $peminjaman->jumlah }}</td>
+        </tr>
+        <tr>
+            <td>Tanggal Pinjam</td>
+            <td>{{ $peminjaman->tanggal_pinjam }}</td>
+        </tr>
+        <tr>
+            <td>Tanggal Kembali</td>
+            <td>{{ $peminjaman->tanggal_kembali }}</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>{{ $peminjaman->status == 1 ? 'Dipinjam' : 'Dikembalikan' }}</td>
+        </tr>
+    </table>
+
+    <table class="table2">
+        <tr>
+            <td>
+                <label>Pegawai</label><br><br><br><br><br><br>
+                <p>( {{ $peminjaman->user->name }} )</p>
+                <p>NIP. {{ $peminjaman->user->profile->nip }}</p>
+            </td>
+            <td>
+                <label>Petugas</label><br><br><br><br><br><br>
+                <p>( {{ $namaPetugas }} )</p>
+                <p>NIP. {{ $nipPetugas }}</p>
+            </td>
+        </tr>
+    </table>
 </body>
 
 </html>

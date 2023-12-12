@@ -144,8 +144,9 @@ class PeminjamanController extends Controller
 
         // Mendapatkan nama petugas
         $namaPetugas = $petugas ? $petugas->name : 'N/A';
+        $nipPetugas = $petugas ? $petugas->profile->nip : 'N/A';
 
-        return view('peminjaman.show', compact('peminjaman', 'inventaris', 'user', 'ruang', 'namaPetugas'));
+        return view('peminjaman.show', compact('peminjaman', 'inventaris', 'user', 'ruang', 'namaPetugas', 'nipPetugas'));
     }
 
     /**

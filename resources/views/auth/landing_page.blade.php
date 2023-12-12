@@ -61,8 +61,6 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav mx-auto py-0">
                         <a href="#home" class="nav-item nav-link active">Home</a>
-                        <a href="#about" class="nav-item nav-link">About</a>
-                        <a href="#overview" class="nav-item nav-link">Overview</a>
                         <a href="#features" class="nav-item nav-link">Features</a>
                         <a href="#testimonial" class="nav-item nav-link">Testimonial</a>
                         <a href="#contact" class="nav-item nav-link">Contact</a>
@@ -98,13 +96,14 @@
 
 
         <!-- Feature Start -->
-        <div class="container-xxl py-6">
+
+        <div class="container-xxl py-5" id="features">
             <div class="container">
                 <div class="row g-4">
                     <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="feature-item bg-light rounded text-center p-5">
                             <i class="fa fa-4x fa-edit text-primary mb-4"></i>
-                            <h5 class="mb-3">Fully Customizable</h5>
+                            <h5 class="mb-3">Peminjaman</h5>
                             <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
                                 stet diam sed stet.</p>
                         </div>
@@ -112,7 +111,7 @@
                     <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="feature-item bg-light rounded text-center p-5">
                             <i class="fa fa-4x fa-sync text-primary mb-4"></i>
-                            <h5 class="mb-3">App Integration</h5>
+                            <h5 class="mb-3">Pengembalian</h5>
                             <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
                                 stet diam sed stet.</p>
                         </div>
@@ -120,7 +119,7 @@
                     <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="feature-item bg-light rounded text-center p-5">
                             <i class="fa fa-4x fa-draw-polygon text-primary mb-4"></i>
-                            <h5 class="mb-3">Drag And Drop</h5>
+                            <h5 class="mb-3">Inventaris</h5>
                             <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
                                 stet diam sed stet.</p>
                         </div>
@@ -129,160 +128,6 @@
             </div>
         </div>
         <!-- Feature End -->
-
-
-        <!-- About Start -->
-        <div class="container-xxl py-6" id="about">
-            <div class="container">
-                <div class="row g-5 flex-column-reverse flex-lg-row">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <h1 class="mb-4">Manage & Push Your Business To The Next Level</h1>
-                        <p class="mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
-                            Clita erat ipsum et lorem et sit, sed stet no labore lorem sit clita duo justo eirmod magna
-                            dolore erat amet</p>
-                        <div class="d-flex mb-4">
-                            <div class="flex-shrink-0 btn-square rounded-circle bg-primary text-white">
-                                <i class="fa fa-check"></i>
-                            </div>
-                            <div class="ms-4">
-                                <h5>First Working Process</h5>
-                                <p class="mb-0">Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit,
-                                    sed stet no labore lorem sit clita duo justo magna</p>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-4">
-                            <div class="flex-shrink-0 btn-square rounded-circle bg-primary text-white">
-                                <i class="fa fa-check"></i>
-                            </div>
-                            <div class="ms-4">
-                                <h5>24/7 Hours Support</h5>
-                                <p class="mb-0">Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit,
-                                    sed stet no labore lorem sit clita duo justo magna</p>
-                            </div>
-                        </div>
-                        <a href="" class="btn btn-primary py-sm-3 px-sm-5 rounded-pill mt-3">Read More</a>
-                    </div>
-                    <div class="col-lg-6">
-                        <img class="img-fluid rounded wow zoomIn" data-wow-delay="0.5s"
-                            src="{{ asset('landing-page/img/about.jpg') }}">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- About End -->
-
-
-        <!-- Overview Start -->
-        <div class="container-xxl bg-light my-6 py-5" id="overview">
-            <div class="container">
-                <div class="row g-5 py-5 align-items-center">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <img class="img-fluid rounded" src="{{ asset('landing-page/img/overview-1.jpg') }}">
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="d-flex align-items-center mb-4">
-                            <h1 class="mb-0">01</h1>
-                            <span class="bg-primary mx-2" style="width: 30px; height: 2px;"></span>
-                            <h5 class="mb-0">App Integration</h5>
-                        </div>
-                        <p class="mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
-                            Clita erat ipsum et lorem et sit, sed stet no labore lorem sit clita duo justo eirmod magna
-                            dolore erat amet</p>
-                        <p><i class="fa fa-check-circle text-primary me-3"></i>Fully customizable</p>
-                        <p><i class="fa fa-check-circle text-primary me-3"></i>User friendly interface</p>
-                        <p class="mb-0"><i class="fa fa-check-circle text-primary me-3"></i>More effective &
-                            poerwfull</p>
-                    </div>
-                </div>
-                <div class="row g-5 py-5 align-items-center flex-column-reverse flex-lg-row">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="d-flex align-items-center mb-4">
-                            <h1 class="mb-0">02</h1>
-                            <span class="bg-primary mx-2" style="width: 30px; height: 2px;"></span>
-                            <h5 class="mb-0">App Customization</h5>
-                        </div>
-                        <p class="mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
-                            Clita erat ipsum et lorem et sit, sed stet no labore lorem sit clita duo justo eirmod magna
-                            dolore erat amet</p>
-                        <p><i class="fa fa-check-circle text-primary me-3"></i>Fully customizable</p>
-                        <p><i class="fa fa-check-circle text-primary me-3"></i>User friendly interface</p>
-                        <p class="mb-0"><i class="fa fa-check-circle text-primary me-3"></i>More effective &
-                            poerwfull</p>
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <img class="img-fluid rounded" src="{{ asset('landing-page/img/overview-2.jpg') }}">
-                    </div>
-                </div>
-                <div class="row g-5 py-5 align-items-center">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <img class="img-fluid rounded" src="{{ asset('landing-page/img/overview-3.jpg') }}">
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="d-flex align-items-center mb-4">
-                            <h1 class="mb-0">03</h1>
-                            <span class="bg-primary mx-2" style="width: 30px; height: 2px;"></span>
-                            <h5 class="mb-0">App Modification</h5>
-                        </div>
-                        <p class="mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
-                            Clita erat ipsum et lorem et sit, sed stet no labore lorem sit clita duo justo eirmod magna
-                            dolore erat amet</p>
-                        <p><i class="fa fa-check-circle text-primary me-3"></i>Fully customizable</p>
-                        <p><i class="fa fa-check-circle text-primary me-3"></i>User friendly interface</p>
-                        <p class="mb-0"><i class="fa fa-check-circle text-primary me-3"></i>More effective &
-                            poerwfull</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Overview End -->
-
-
-        <!-- Advanced Feature Start -->
-        <div class="container-xxl py-6" id="features">
-            <div class="container">
-                <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                    <h1 class="mb-3">Advanced Features</h1>
-                    <p class="mb-5">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita
-                        erat ipsum et lorem et sit, sed stet no labore lorem sit clita duo justo</p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="advanced-feature-item text-center rounded py-5 px-4">
-                            <i class="fa fa-edit fa-3x text-primary mb-4"></i>
-                            <h5 class="mb-3">Fully Customizable</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                                stet.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="advanced-feature-item text-center rounded py-5 px-4">
-                            <i class="fa fa-sync fa-3x text-primary mb-4"></i>
-                            <h5 class="mb-3">App Integration</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                                stet.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="advanced-feature-item text-center rounded py-5 px-4">
-                            <i class="fa fa-laptop fa-3x text-primary mb-4"></i>
-                            <h5 class="mb-3">High Resolution</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                                stet.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="advanced-feature-item text-center rounded py-5 px-4">
-                            <i class="fa fa-draw-polygon fa-3x text-primary mb-4"></i>
-                            <h5 class="mb-3">Drag And Drop</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                                stet.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Advanced Feature End -->
-
 
         <!-- Facts Start -->
         <div class="container-xxl bg-primary my-6 py-6 wow fadeInUp" data-wow-delay="0.1s">

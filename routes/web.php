@@ -27,7 +27,7 @@ Route::get('/peminjaman/{peminjaman}/print', [GenerateController::class, 'genera
 
 Route::get('/', [AuthController::class, 'homepage'])->middleware('guest')->name('auth.homepage');
 
-Route::middleware(['auth', 'can:isUser'])->group(
+Route::middleware(['auth', 'can:isUser' | 'can:isAdmin'])->group(
     function () {
         Route::get('/inventaris', [InventarisController::class, 'index'])->name('inventaris.index');
         Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');
@@ -50,8 +50,18 @@ Route::middleware(['auth', 'can:isPetugas'])->group(
 Route::middleware(['auth', 'can:isAdmin'])->group(
     function () {
         // ->except(['store', 'update', 'edit'])
-        Route::resource('peminjaman', PeminjamanController::class);
-        Route::resource('inventaris', InventarisController::class);
+        Route::get('/inventaris', [InventarisController::class, 'index'])->name('inventaris.index');
+        Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');
+        Route::get('/peminjaman/create', [PeminjamanController::class, 'create'])->name('peminjaman.create');
+
+        Route::get('/inventaris/create', [InventarisController::class, 'create'])->name('inventaris.create');
+        Route::post('/inventaris', [InventarisController::class, 'store'])->name('inventaris.store');
+        Route::get('/inventaris/{inventari}/edit', [InventarisController::class, 'edit'])->name('inventaris.edit');
+        Route::put('/inventaris/{inventari}', [InventarisController::class, 'update'])->name('inventaris.update');
+
+        Route::put('/peminjaman/{peminjaman}', [PeminjamanController::class, 'update'])->name('peminjaman.update');
+        Route::get('/peminjaman/{peminjaman}/edit', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
+    
         Route::delete('/inventaris/{inventari}', [InventarisController::class, 'destroy'])->name('inventaris.destroy');
         Route::delete('/peminjaman/{peminjaman}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
     }

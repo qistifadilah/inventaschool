@@ -49,18 +49,6 @@
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $value->profile->nip }}</td>
                                 <td>{{ $value->name }}</td>
-                                <td>
-                                    <form action="{{ route('petugas.destroy', $value->id) }}" method="POST"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" data-toggle="tooltip" data-placement="top"
-                                            title="delete"
-                                            onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
                             </tr>
                         @empty
                             <tr>

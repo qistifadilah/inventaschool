@@ -22,10 +22,7 @@ class GenerateController extends Controller
         $namaPetugas = $petugas ? $petugas->name : 'N/A';
         $nipPetugas = $petugas ? $petugas->profile->nip : 'N/A';
 
-        $pdf =  PDF::loadView('peminjaman.print', compact('peminjaman', 'inventaris', 'ruangs', 'user', 'namaPetugas', 'nipPetugas'))->output();
-        // Mengirimkan PDF sebagai respons
-        return response($pdf, 200)
-        ->header('Content-Type', 'application/pdf')
-        ->header('Content-Disposition', 'attachment; filename="InventaSchool.pdf"');
+        $pdf =  PDF::loadView('peminjaman.print', compact('peminjaman', 'inventaris', 'ruangs', 'user', 'namaPetugas', 'nipPetugas'));
+        return $pdf->download('InventaSchool.pdf');
     }
 }
